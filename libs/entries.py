@@ -1,20 +1,20 @@
-class Entry:
+from data import open_json
 
-    dict_entries = {
-        "Fruit": 22,
-        "Plain": 14,
-        "Cinnamon": 4,
-        "Cheese": 21
-    }
-
-    def new_entry(self, deal, price):
-        self.dict_entries[deal] = price
+dict_entries = {
+    "Fruit": 22,
+    "Plain": 14,
+    "Cinnamon": 4,
+    "Cheese": 21
+}
 
 
-entry = Entry()
+def new_entry(deal, price):
+    dict_entries[deal] = price
+    open_json
+
 
 deal = "Apfel"
 price = 2
-entry.new_entry(deal, price)
+new_entry(deal, price)
 
-print(entry.dict_entries)
+print(dict_entries)

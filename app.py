@@ -1,10 +1,10 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from libs.entries import Entry
+from flask import url_for
+from libs import entries, data
 
-entry = Entry()
-print(entry.dict_entries)
+print(entries.dict_entries)
 
 app = Flask(__name__)
 
@@ -19,8 +19,8 @@ def new_entry():
     if request.method == 'POST':
         deal = request.form['deal_input']
         price = request.form['price_input']
-        entry.new_entry(deal, price)
-        print(entry.dict_entries)
+        entries.new_entry(deal, price)
+        print(entries.dict_entries)
         return "Vielen Dank für deine Eingabe!"
     return render_template("new_entry.html")
 
