@@ -1,19 +1,22 @@
-{% include "header.html" %}
+<!-- import the base html structure -->
+{% extends "blocks/base.html" %}
 
-<main>
+
+{%  block content %}
+
+    <!-- start content -->
 
 
-    <div class="container mt-4">
+<h1>Overview</h1>
+    <p>Content starts here</p>
 
-    <h1>Vorschlag erfassen</h1>
+    {% for key, value in deals.items() %}
+    <ul>{{ key }}: {{ value["name"] }} ({{ value["price"] }} CHF)</ul>
+    {% endfor %}
 
-    <div class="row">
-    <div class="col">col-1</div>
-        <div class="col">col-2</div>
-    </div>
 
-        </div>
+    <!-- end content -->
 
-</main>
+{% endblock %}
 
-{% include "footer.html" %}
+

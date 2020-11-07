@@ -1,6 +1,49 @@
-<form method="POST">
-    <input type="text" name="deal_input" placeholder="Deal Name">
-        <input type="text" name="price_input" placeholder="Price">
+<!-- import base html structure -->
+{% extends "blocks/base.html" %}
 
-    <button type="submit">Senden</button>
-</form>
+
+{% block content %}
+
+    <!-- start content -->
+
+    <h1 class="mb-4">New Entry</h1>
+
+    <form method="POST">
+        <div class="row">
+            <div class="col-6">
+                <input type="text" class="form-control" name="post_deal" placeholder="Name of Deal" required>
+            </div>
+            <div class="col-6">
+                <input type="text" class="form-control" name="post_price" placeholder="Price" required>
+            </div>
+        </div>
+
+
+    <!--
+        <div class="row mt-3">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Kategorie</label>
+                    <select class="form-control" name="colours">
+                        {% for colour in colours %}
+                            <option value="{{ colour }}" SELECTED>{{ colour }}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+            </div>
+        </div>
+    -->
+
+
+        <button type="submit" class="btn btn-success">Senden</button>
+    </form>
+
+    <p>{{ message }}</p>
+
+
+
+
+    <!-- end content -->
+
+{% endblock %}
