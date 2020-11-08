@@ -7,7 +7,7 @@ from functools import wraps
 from flask import g
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "OCML3BRawWEUeaxcuKHLpw"
+# app.config["SECRET_KEY"] = "OCML3BRawWEUeaxcuKHLpw"
 
 """
 @app.before_request
@@ -19,27 +19,14 @@ def check_session():
     return redirect(url_for("new_entry"))
 
 
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        # if user is not logged in, redirect to login page
-        if not request.headers["authorization"]:
-            return redirect("login page")
-        # get user via some ORM system
-        user = User.get(request.headers["authorization"])
-        # make user available down the pipeline via flask.g
-        g.user = user
-        # finally call f. f() now haves access to g.user
-        return f(*args, **kwargs)
-
-    return wrap
 """
+
 
 @app.route("/")
 def index():
     return render_template("index.html", deals=load_data())
 
-"""
+
 @app.route('/sign-in', methods=["GET", "POST"])
 def sign_in():
     if request.method == "POST":
@@ -71,7 +58,7 @@ def sign_out():
     session.pop("USERNAME", None)
 
     return redirect(url_for("sign_in"))
-"""
+
 
 @app.route('/new_entry', methods=['GET', 'POST'])
 def new_entry():
@@ -84,11 +71,7 @@ def new_entry():
     return render_template("new_entry.html")
 
 
-"""
-@app.route("/login")
-def login():
-    return render_template("sign-in.html")
-"""
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

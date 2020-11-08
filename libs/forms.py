@@ -1,8 +1,8 @@
-def rabatt_berechnen(preis):
-    neuer_preis = preis - (preis * 0.1)
-    return neuer_preis
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField
+from wtforms.validators import DataRequired
 
 
-def grosser_rabatt_berechnen(preis):
-    neuer_preis = preis - (preis * 0.25)
-    return neuer_preis
+class EntryForm(FlaskForm):
+    deal_name = StringField('DealName', validators=[DataRequired])
+    deal_price = IntegerField('Price', valdidators=[DataRequired])
