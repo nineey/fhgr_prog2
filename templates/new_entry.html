@@ -19,27 +19,40 @@
         </div>
 
 
-    <!--
+
         <div class="row mt-3">
             <div class="col-6">
                 <div class="form-group">
                     <label>Kategorie</label>
-                    <select class="form-control" name="colours">
-                        {% for colour in colours %}
-                            <option value="{{ colour }}" SELECTED>{{ colour }}</option>
+                    <select class="form-control" name="post_category">
+                    <option value="" selected disabled>Choose category</option>
+                        {% for category in categories %}
+                            <option value="{{ category }}">{{ category }}</option>
                         {% endfor %}
                     </select>
 
                 </div>
             </div>
+        <div class="col-6 mt-4">
+            <input type="file" name="img_upload">
         </div>
-    -->
+        </div>
 
 
-        <button type="submit" class="btn btn-success">Senden</button>
+
+        <button type="submit" class="btn btn-success mb-3">Senden</button>
     </form>
 
-    <p>{{ message }}</p>
+    <!-- show message for successful entry -->
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success" role="alert">
+          {{ message }}
+</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
 
 
