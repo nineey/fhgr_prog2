@@ -1,15 +1,18 @@
 import json
+from datetime import date
+
+date = date.today().strftime('%d.%m.%Y')
 
 
 # create JSON file and add dict
-def save_data(id, deal, price):
+def save_data(id, deal, price, category):
     try:
         with open('data/data.json', 'r') as db:
             deals = json.load(db)
     except:
         deals = {}
 
-    deals[id] = {"name": deal, "price": price}
+    deals[id] = {"name": deal, "price": price, "category": category, "date": str(date)}
 
     with open('data/data.json', 'w') as db:
         json.dump(deals, db, indent=4)
@@ -35,8 +38,3 @@ def id_handler():
     return new_id
 
 
-# get users
-def load_users():
-    with open('data/users.json', 'r') as db:
-        users = json.load(db)
-    return users
