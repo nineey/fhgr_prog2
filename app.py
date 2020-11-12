@@ -3,24 +3,15 @@ from flask import render_template
 from flask import request
 from flask import flash
 from flask import session, redirect, url_for
+from werkzeug.security import check_password_hash
+
+from libs import auth_handler
 from libs.auth_handler import check_login, login_required, load_users, save_users
 from libs.category_handler import load_categories
 from libs.data_handler import *
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "ThisIsMyVerySecretKey"
-
-"""
-@app.before_request
-def check_session():
-    if not session.get("USERNAME") is None:
-        g.users = load_users()
-        username = session.get("USERNAME")
-        g.user = g.users[username]
-    return redirect(url_for("new_entry"))
-
-
-"""
 
 
 @app.route("/")
@@ -70,6 +61,13 @@ def users():
         lastname = request.form['input_firstname']
         save_users(username, password, firstname, lastname)
     return render_template("users.html", users=load_users())
+
+
+@app.route("/users/delete/<username>")
+@login_required
+def delete_user(username):
+    auth_handler.delete_user(username)
+    return redirect(request.referrer)
 
 
 if __name__ == "__main__":
