@@ -10,7 +10,7 @@
     <h1>Users</h1>
     <p>Content starts here</p>
 
-    <table id="overview_table" class="table table-hover">
+    <table id="overview_table" class="table">
         <thead>
         <tr>
             <th scope="col">Username</th>
@@ -20,14 +20,15 @@
         </tr>
         </thead>
 
-        {% for key, value in users.items() %}
+        {% for user in users.values() %}
             <tbody>
             <tr>
-                <th scope="row">{{ key }}</th>
-                <td>{{ value["firstname"] }} </td>
-                <td>{{ value["lastname"] }}</td>
-                <td>
-                </td>
+                <th scope="row">{{ user["username"] }}</th>
+                <td>{{ user["firstname"] }} </td>
+                <td>{{ user["lastname"] }}</td>
+                {% if not user["username"] == "admin" %}
+                <td><a href="{{ url_for("delete_user", username=user["username"]) }}">Delete</a></td>
+                {% endif %}
             </tbody>
         {% endfor %}
     </table>
