@@ -10,34 +10,34 @@
 <h1>Overview</h1>
     <p>Hello {{ user }}</p>
 
+
       <table id="overview_table" class="table table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
+        <th scope="col">added by</th>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
       <th scope="col">Category</th>
+        <th scope="col">Details</th>
     </tr>
   </thead>
 
    {% for key, value in deals.items() %}
   <tbody>
     <tr>
-      <th scope="row">{{ key }}</th>
+
+      <td>{{ key }}</td>
+        <td>{{ value["user"] }}</td>
       <td>{{ value["name"] }}</td>
       <td>{{ value["price"] }} CHF</td>
       <td>{{ value["category"] }}</td>
+       <td><a href="{{ url_for("show_deal", id=key) }}">Details</a></td>
+
+    </tr>
   </tbody>
     {% endfor %}
 </table>
-
-    <ul class="pagination">
-  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item active"><a class="page-link" href="#">2</a></li>
-  <li class="page-item"><a class="page-link" href="#">3</a></li>
-  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul>
 
 
     <!-- end content -->
