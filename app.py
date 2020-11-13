@@ -2,8 +2,8 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import flash
-from flask import session, redirect, url_for
-from werkzeug.security import check_password_hash
+from flask_paginate import Pagination, get_page_args
+from flask import redirect, url_for
 
 from libs import auth_handler
 from libs.auth_handler import check_login, login_required, load_users, save_users
@@ -14,12 +14,6 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "ThisIsMyVerySecretKey"
 
 
-@app.route("/")
-@login_required
-def index():
-    return render_template("index.html", deals=load_data(), user=session["USERNAME"])
-
-
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -28,6 +22,19 @@ def login():
         if check_login(username, password) is True:
             return redirect(url_for('index'))
     return render_template("login.html")
+
+
+@app.route("/")
+@login_required
+def index():
+    return render_template("index.html", deals=load_data(), user=session["USERNAME"])
+
+
+@app.route("/pdp/<id>")
+@login_required
+def show_deal(id):
+    deals = load_data()
+    return render_template("detailpage.html", deal=deals[id])
 
 
 @app.route("/logout")
