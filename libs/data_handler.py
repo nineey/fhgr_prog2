@@ -13,7 +13,7 @@ def save_data(id, deal, price, category):
     except:
         deals = {}
 
-    deals[id] = {"user": session["USERNAME"], "name": deal, "price": price, "category": category, "date": str(date)}
+    deals[id] = {"user": session["USERNAME"], "name": deal, "price": price, "category": category, "date": str(date), "voting": {}}
 
     with open('data/data.json', 'w') as db:
         json.dump(deals, db, indent=4)
@@ -39,3 +39,24 @@ def id_handler():
     return new_id
 
 
+def add_voting(deal_id, username, vote):
+    deals = load_data()
+    deals[deal_id]["voting"][username] = vote
+    with open('data/data.json', 'w') as db:
+        json.dump(deals, db, indent=4)
+
+        """
+
+def vote_accepted(deal_id, username):
+    deals = load_data()
+    deals[deal_id].update(accepted=username)
+    with open('data/data.json', 'w') as db:
+        json.dump(deals, db, indent=4)
+
+
+def vote_rejected(deal_id, username):
+    deals = load_data()
+    deals[deal_id].update(rejected=username)
+    with open('data/data.json', 'w') as db:
+        json.dump(deals, db, indent=4)
+"""

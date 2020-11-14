@@ -1,13 +1,7 @@
-from flask import Flask
-from flask import render_template
-from flask import request
-from flask import flash
-from flask_paginate import Pagination, get_page_args
-from flask import redirect, url_for
+from flask import Flask, render_template, flash
 
-from libs import auth_handler
-from libs.auth_handler import check_login, login_required, load_users, save_users
-from libs.category_handler import load_categories
+from libs.auth_handler import *
+from libs.category_handler import *
 from libs.data_handler import *
 
 app = Flask(__name__)
@@ -27,7 +21,14 @@ def login():
 @app.route("/")
 @login_required
 def index():
+
     return render_template("index.html", deals=load_data(), user=session["USERNAME"])
+
+
+@app.route("/all")
+@login_required
+def all_deals():
+    return render_template("all.html", deals=load_data(), user=session["USERNAME"])
 
 
 @app.route("/pdp/<id>")
@@ -35,6 +36,14 @@ def index():
 def show_deal(id):
     deals = load_data()
     return render_template("detailpage.html", deal=deals[id])
+
+
+@app.route("/voting/<vote>/<deal_id>")
+@login_required
+def voting_vote(deal_id, vote):
+    username = session["USERNAME"]
+    add_voting(deal_id, username, vote)
+    return redirect(url_for("index"))
 
 
 @app.route("/logout")
@@ -72,9 +81,9 @@ def users():
 
 @app.route("/users/delete/<username>")
 @login_required
-def delete_user(username):
-    auth_handler.delete_user(username)
-    return redirect(request.referrer)
+def users_delete_user(username):
+    delete_user(username)
+    return redirect(url_for("users"))
 
 
 if __name__ == "__main__":

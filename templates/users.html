@@ -27,7 +27,7 @@
                 <td>{{ user["firstname"] }} </td>
                 <td>{{ user["lastname"] }}</td>
                 {% if not user["username"] == "admin" %}
-                    <td><a href="{{ url_for("delete_user", username=user["username"]) }}">Delete</a></td>
+                    <td><a href="{{ url_for("users_delete_user", username=user["username"]) }}">Delete</a></td>
                 {% endif %}
             </tbody>
         {% endfor %}
