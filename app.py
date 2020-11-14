@@ -26,13 +26,13 @@ def register():
         firstname = request.form['input_firstname']
         lastname = request.form['input_lastname']
         if check_username(username) == "taken":
-            flash("Username already taken. Please try again.")
+            flash("Username already taken. Please try again.", "danger")
             redirect(url_for("register"))
         else:
             save_new_user(username, password, firstname, lastname)
-            flash("Successfully registered. Enter your login below.")
+            flash("Successfully registered. Enter your login below.", "success")
             return redirect(url_for("login"))
-    return render_template("register.html")
+    return render_template("login.html")
 
 
 @app.route("/")
