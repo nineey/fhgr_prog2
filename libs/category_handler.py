@@ -1,24 +1,36 @@
+"""
+Contains all functions related to categories.
+"""
+
 import json
 
 
-# category handler
-
-
 def save_category(category):
+    """
+    save new category to existing or new JSON-file
+    :param category: user input of new category
+    """
     try:
-        with open('../data/categories.json', 'r') as file:
+        with open('data/categories.json', 'r') as file:
             categories = json.load(file)
     except:
         categories = []
 
     categories.append(category)
 
-    with open('../data/categories.json', 'w') as file:
+    with open('data/categories.json', 'w') as file:
         json.dump(categories, file)
 
 
-# load JSON
 def load_categories():
-    with open('data/categories.json', 'r') as file:
-        categories = json.load(file)
+    """
+    function to get list a categories from JSON-file
+    :return: list of all categories
+    """
+    try:
+        with open('data/categories.json', 'r') as file:
+            categories = json.load(file)
+    except:
+        categories = []
+
     return categories

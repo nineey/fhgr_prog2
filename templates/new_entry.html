@@ -8,7 +8,7 @@
 
     <h1 class="mb-4">New Entry</h1>
 
-    <form method="POST">
+    <form action="/new_entry" method="POST">
         <div class="row">
             <div class="col-6">
                 <input type="text" class="form-control" name="post_deal" placeholder="Name of Deal" required>
@@ -19,13 +19,12 @@
         </div>
 
 
-
         <div class="row mt-3">
             <div class="col-6">
                 <div class="form-group">
                     <label>Kategorie</label>
                     <select class="form-control" name="post_category">
-                    <option value="" selected disabled>Choose category</option>
+                        <option value="" selected disabled>Choose category</option>
                         {% for category in categories %}
                             <option value="{{ category }}">{{ category }}</option>
                         {% endfor %}
@@ -36,21 +35,25 @@
 
         </div>
 
+        <button type="submit" class="btn btn-success mb-3">Submit</button>
+    </form>
 
 
-        <button type="submit" class="btn btn-success mb-3">Senden</button>
+    <form action="/new_entry/new_category" method="POST">
+        <input type="text" class="form-control" name="post_category" placeholder="New category" required>
+        <button type="submit" class="btn btn-success mb-3">Submit</button>
     </form>
 
     <!-- show message for successful entry -->
     {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert alert-success" role="alert">
-          {{ message }}
-</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
 
 
