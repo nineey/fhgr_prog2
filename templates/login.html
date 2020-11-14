@@ -23,6 +23,17 @@
       <h1>Sign in</h1>
       <hr>
 
+           <!-- show message when username is taken -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
       <form action="/login" method="POST">
 
         <div class="form-group">
@@ -41,10 +52,16 @@
 
     </div>
   </div>
-</div>
+
+    <div class="lead mt-5">No login?</div>
+    <a href="{{ url_for("register") }}"><button type="button" class="btn btn-success">Register now!</button></a>
 
 
-    <!-- end content -->
+
+
+
+</div> <!-- end container -->
+
 
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"

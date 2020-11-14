@@ -1,9 +1,9 @@
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark navbar-custom">
     <div class="container"><a class="navbar-brand" href="#">Brand</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="nav navbar-nav ml-auto">
+            <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('index') }}">Overview</a>
+            <a class="nav-link" href="{{ url_for('index') }}">Voting</a>
         </li>
 
                   <li class="nav-item">
@@ -16,6 +16,10 @@
 
         <li class="nav-item">
             <a class="nav-link" href="{{ url_for('users') }}">Users</a>
+        </li>
+
+                 <li class="nav-item ml-5 mt-1">
+            <div class="lead text-white">Current user: {{ session["USERNAME"] }}</div>
         </li>
 
         <li class="nav-item">

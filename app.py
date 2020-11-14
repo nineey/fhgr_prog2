@@ -18,11 +18,27 @@ def login():
     return render_template("login.html")
 
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == 'POST':
+        username = request.form['input_username']
+        password = request.form['input_password']
+        firstname = request.form['input_firstname']
+        lastname = request.form['input_lastname']
+        if check_username(username) == "taken":
+            flash("Username already taken. Please try again.")
+            redirect(url_for("register"))
+        else:
+            save_new_user(username, password, firstname, lastname)
+            flash("Successfully registered. Enter your login below.")
+            return redirect(url_for("login"))
+    return render_template("register.html")
+
+
 @app.route("/")
 @login_required
 def index():
-
-    return render_template("index.html", deals=load_data(), user=session["USERNAME"])
+    return render_template("voting.html", deals=load_data(), user=session["USERNAME"])
 
 
 @app.route("/all")
@@ -61,21 +77,42 @@ def new_entry():
         price = request.form['post_price']
         category = request.form['post_category']
         save_data(id_handler(), deal, price, category)
-        flash("Eingabe erfolgreich!")
+        flash("New deal successfully added!")
         return redirect(url_for("new_entry"))
 
     return render_template("new_entry.html", categories=load_categories())
 
 
-@app.route("/users", methods=['GET', 'POST'])
+@app.route('/new_entry/new_category', methods=['GET', 'POST'])
+@login_required
+def new_category():
+    if request.method == 'POST':
+        category = request.form['post_category']
+        save_category(category)
+        flash("Category successfully added!")
+        return redirect(url_for("new_entry"))
+
+
+@app.route("/users")
 @login_required
 def users():
+    return render_template("users.html", users=load_users())
+
+
+@app.route("/users/add", methods=['GET', 'POST'])
+@login_required
+def add_user():
     if request.method == 'POST':
         username = request.form['input_username']
         password = request.form['input_password']
         firstname = request.form['input_firstname']
-        lastname = request.form['input_firstname']
-        save_users(username, password, firstname, lastname)
+        lastname = request.form['input_lastname']
+        if check_username(username) == "taken":
+            flash("Username already taken. Please try again.")
+            redirect(url_for("users"))
+        else:
+            save_new_user(username, password, firstname, lastname)
+            return redirect(url_for("users"))
     return render_template("users.html", users=load_users())
 
 
