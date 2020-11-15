@@ -27,7 +27,7 @@
                 <td>{{ user["firstname"] }} </td>
                 <td>{{ user["lastname"] }}</td>
                 {% if not user["username"] == "admin" %}
-                    <td><a href="{{ url_for("users_delete_user", username=user["username"]) }}">Delete</a></td>
+                    <td><a href="{{ url_for("users_delete_user", username=user["username"]) }}"><i class="fas fa-trash fa-2x"></i></a></td>
                 {% endif %}
             </tbody>
         {% endfor %}
@@ -74,39 +74,6 @@
 
     <!-- end content -->
 {% endblock %}
-
-
-<!-- Button to Open the Modal
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                        Add user
-                    </button>
-
-
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Add user</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-
-                <div class="modal-body">
-                    Modal body..
-                </div>
-
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
--->
 
 
 

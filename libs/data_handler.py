@@ -15,7 +15,21 @@ def load_data():
             deals = json.load(db)
     except:
         deals = {}
+
     return deals
+
+def load_data_range(start, count):
+    deals = load_data()
+    keys = deals.keys()
+    keys = [int(i) for i in keys]
+
+    sliced_keys = keys[start:start+count]
+
+    deals_to_return = {}
+    for key in sliced_keys:
+        deals_to_return[str(key)] = deals[str(key)]
+
+    return deals_to_return
 
 
 def save_data(id, deal, price, category):

@@ -24,7 +24,7 @@ def save_category(category):
 
 def load_categories():
     """
-    function to get list a categories from JSON-file
+    function to get list of categories from JSON-file
     :return: list of all categories
     """
     try:

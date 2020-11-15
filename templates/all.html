@@ -43,6 +43,9 @@
     {% endfor %}
 </table>
 
+    <a href="{{ url_for("all_deals_range", page=nextPage) }}">Next</a>
+
+    <a href="{{ url_for("all_deals_range", page=prevPage) }}">Back</a>
 
     <!-- end content -->
 {% endblock %}

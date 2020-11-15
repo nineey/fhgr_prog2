@@ -15,6 +15,8 @@ def login():
         password = request.form['password']
         if check_login(username, password) is True:
             return redirect(url_for('index'))
+        else:
+            flash("Incorrect username or password. Please try again.", "warning")
     return render_template("login.html")
 
 
@@ -45,6 +47,16 @@ def index():
 @login_required
 def all_deals():
     return render_template("all.html", deals=load_data(), user=session["USERNAME"])
+
+
+@app.route("/all/<page>")
+@login_required
+def all_deals_range(page):
+    count = 10
+    page_int = int(page)
+    page_int_for_data = page_int - 1
+    start = page_int_for_data * count
+    return render_template("all.html", deals=load_data_range(start, count), user=session["USERNAME"], nextPage=page_int+1, prevPage=page_int-1)
 
 
 @app.route("/pdp/<id>")

@@ -35,7 +35,6 @@ def check_login(username, password):
 
     # check if given username exists
     if username.lower() not in users:
-        print("username not found")
         # return to login page
         return redirect(request.url)
     else:
@@ -47,7 +46,6 @@ def check_login(username, password):
         session["USERNAME"] = user["username"]
         return True
     else:
-        print("password incorrect")
         # redirect to login page if password wrong
         return redirect(request.url)
 
@@ -105,7 +103,7 @@ def check_username(username):
     if username.lower() in users.keys():
         return "taken"
     else:
-        return "free"
+        pass
 
 
 
