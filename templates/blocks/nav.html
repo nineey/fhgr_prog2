@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark navbar-custom">
-    <div class="container"><a class="navbar-brand" href="#">Brand</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span class="navbar-toggler-icon"></span></button>
+    <div class="container"><a class="navbar-brand" href="{{ url_for("index") }}">Votery</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item">
@@ -7,7 +7,7 @@
         </li>
 
                   <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('all_deals') }}">All</a>
+            <a class="nav-link" href="{{ url_for('all_deals_range', page=1) }}">All</a>
         </li>
 
         <li class="nav-item">
@@ -18,13 +18,22 @@
             <a class="nav-link" href="{{ url_for('users') }}">Users</a>
         </li>
 
+                  <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('categories') }}">Categories</a>
+        </li>
+
+                    <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('stats') }}">Stats</a>
+        </li>
+
                  <li class="nav-item ml-5 mt-1">
             <div class="lead text-white">Current user: {{ session["USERNAME"] }}</div>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            <a class="nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt text-white"></i></a>
         </li>
+
             </ul>
         </div>
     </div>

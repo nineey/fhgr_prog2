@@ -20,10 +20,10 @@
 
 
         <div class="row mt-3">
-            <div class="col-6">
+            <div class="col-4">
                 <div class="form-group">
                     <label>Kategorie</label>
-                    <select class="form-control" name="post_category">
+                    <select class="form-control" name="post_category" required>
                         <option value="" selected disabled>Choose category</option>
                         {% for category in categories %}
                             <option value="{{ category }}">{{ category }}</option>
@@ -33,27 +33,41 @@
                 </div>
             </div>
 
+
         </div>
 
-        <button type="submit" class="btn btn-success mb-3">Submit</button>
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
     </form>
 
 
-    <form action="/new_entry/new_category" method="POST">
-        <input type="text" class="form-control" name="post_category" placeholder="New category" required>
-        <button type="submit" class="btn btn-success mb-3">Submit</button>
-    </form>
 
-    <!-- show message for successful entry -->
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+           <!-- show message when entry added successful -->
+{% with errors = get_flashed_messages(category_filter=["success"]) %}
+    {% if errors %}
+        {%- for message in errors %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor -%}
+    {% endif %}
+{% endwith %}
+
+            <!-- show message when price tag isn't a number -->
+        {% with errors = get_flashed_messages(category_filter=["danger"]) %}
+    {% if errors %}
+        {%- for message in errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor -%}
+    {% endif %}
+{% endwith %}
 
 
 
@@ -61,3 +75,7 @@
     <!-- end content -->
 
 {% endblock %}
+
+
+
+

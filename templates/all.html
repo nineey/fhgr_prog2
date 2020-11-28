@@ -11,6 +11,32 @@
     <div class="lead mb-5">All deals in the database</div>
 
 
+    <div class="row mb-3">
+
+
+    {% if max_pages <= page %}
+        <a href="{{ url_for("all_deals_range", page=prevPage) }}"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
+                                <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
+
+
+
+        {% elif page == 1 %}
+                <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
+
+         <a href="{{ url_for("all_deals_range", page=nextPage) }}"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
+
+
+        {% else %}
+        <a href="{{ url_for("all_deals_range", page=prevPage) }}"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
+                        <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
+
+         <a href="{{ url_for("all_deals_range", page=nextPage) }}"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
+
+
+
+    {% endif %}
+
+    </div>
 
       <table id="overview_table" class="table">
   <thead>
@@ -42,6 +68,7 @@
 
     {% endfor %}
 </table>
+
 
 
     <!-- end content -->

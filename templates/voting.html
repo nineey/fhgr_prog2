@@ -25,7 +25,7 @@
   </thead>
 
 
-   {% for id, value in deals.items() if user not in deals[id]["voting"] %}
+   {% for id, value in deals.items() if user not in deals[id]["accepted"] + deals[id]["rejected"] %}
 
        <tbody>
     <tr>

@@ -8,8 +8,37 @@
 
 
 <h1>Detailpage</h1>
-    <p>{{ deal["name"] }}</p>
+    <p>Name of the deal: <br>{{ deal["name"] }}</p>
+    <p>Price: <br>{{ deal["price"] }}</p>
 
+
+    <h2>Voting</h2>
+
+
+
+    <div class="row">
+    <div class="col-6">{{ voting_pie|safe }}</div>
+{% if accepted + rejected %}
+    <div class="col">
+    <p>Accepted:</p>
+    {{ accepted_counter }}
+    {% for user in accepted %}
+    <li>{{ user }}</li>
+    {% endfor %}
+    </div>
+
+    <div class="col">
+    <p>Rejected:</p>
+    {{ rejected_counter }}
+    {% for user in rejected %}
+    <li>{{ user }}</li>
+    {% endfor %}
+    </div>
+
+    {% else %}
+    <p>no voting yet</p>
+    {% endif %}
+    </div>
 
     <!-- end content -->
 {% endblock %}
