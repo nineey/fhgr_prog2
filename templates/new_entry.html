@@ -23,7 +23,7 @@
             <div class="col-4">
                 <div class="form-group">
                     <label>Kategorie</label>
-                    <select class="form-control" name="post_category">
+                    <select class="form-control" name="post_category" required>
                         <option value="" selected disabled>Choose category</option>
                         {% for category in categories %}
                             <option value="{{ category }}">{{ category }}</option>
@@ -33,15 +33,6 @@
                 </div>
             </div>
 
-            <div class="col-4">
-
-                <!-- Button to Open the Modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                    Open modal
-                </button>
-
-
-            </div>
 
         </div>
 
@@ -49,51 +40,34 @@
     </form>
 
 
-    <!-- Modal starts here -->
 
-    <!-- The Modal -->
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <form action="/new_entry/new_category" method="POST">
-                        <input type="text" class="form-control" name="post_category" placeholder="New category"
-                               required>
-
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary mb-3">Submit</button>
-                    </form>
-                </div>
-
-            </div>
+           <!-- show message when entry added successful -->
+{% with errors = get_flashed_messages(category_filter=["success"]) %}
+    {% if errors %}
+        {%- for message in errors %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-    </div>
+        {% endfor -%}
+    {% endif %}
+{% endwith %}
 
-    <!-- modal ends here -->
-
-
-
-    <!-- show message for successful entry -->
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+            <!-- show message when price tag isn't a number -->
+        {% with errors = get_flashed_messages(category_filter=["danger"]) %}
+    {% if errors %}
+        {%- for message in errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor -%}
+    {% endif %}
+{% endwith %}
 
 
 

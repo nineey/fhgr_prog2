@@ -1,0 +1,81 @@
+<!-- import the base html structure -->
+{% extends "blocks/base.html" %}
+
+
+{% block content %}
+
+    <!-- start content -->
+
+
+    <h1>Categories</h1>
+    <p>Add or remove a category</p>
+
+    <table id="overview_table" class="table">
+        <thead>
+        <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+
+        {% for category in categories %}
+            <tbody>
+            <tr>
+                <td scope="row">{{ category }}</td>
+                    <td><a href="{{ url_for("categories_delete_category", category=category) }}"><i class="fas fa-trash fa-2x"></i></a></td>
+            </tbody>
+        {% endfor %}
+    </table>
+
+    <!-- section: add new category -->
+
+    <h2 class="mt-5">New category</h2>
+
+    <form action="/category/add" method="POST">
+        <div class="row">
+            <div class="col-6">
+                <input type="text" class="form-control" name="post_category" placeholder="Name of Category" required>
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-success mt-3 mb-3">Add category</button>
+    </form>
+
+<!-- end of section -->
+
+           <!-- show message when category already exists -->
+{% with errors = get_flashed_messages(category_filter=["success"]) %}
+    {% if errors %}
+        {%- for message in errors %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor -%}
+    {% endif %}
+{% endwith %}
+
+
+            <!-- show message when category successfully added -->
+        {% with errors = get_flashed_messages(category_filter=["warning"]) %}
+    {% if errors %}
+        {%- for message in errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor -%}
+    {% endif %}
+{% endwith %}
+
+    <!-- end content -->
+{% endblock %}
+
+
+
+
