@@ -34,3 +34,27 @@ def load_categories():
         categories = []
 
     return categories
+
+
+def delete_category(category):
+    """
+    Function to delete a single category
+    :param category: identifies the category to delete
+    """
+    categories = load_categories()
+    categories.remove(category)
+    with open('data/categories.json', 'w') as db:
+        json.dump(categories, db)
+
+
+def check_category(category):
+    """
+    check if category already exists
+    :param category: user input of new category
+    :return: if category already exist, return False
+    """
+    categories = load_categories()
+    if category.lower() in categories:
+        return False
+    else:
+        pass

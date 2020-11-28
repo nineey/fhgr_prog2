@@ -1,4 +1,6 @@
 import json
+import math
+
 from flask import session
 from datetime import date
 
@@ -18,18 +20,21 @@ def load_data():
 
     return deals
 
+
 def load_data_range(start, count):
     deals = load_data()
     keys = deals.keys()
     keys = [int(i) for i in keys]
+    keys = list(reversed(keys))
+    max_pages = math.ceil((len(keys)) / 10)
 
-    sliced_keys = keys[start:start+count]
+    sliced_keys = keys[start:start + count]
 
     deals_to_return = {}
     for key in sliced_keys:
         deals_to_return[str(key)] = deals[str(key)]
 
-    return deals_to_return
+    return deals_to_return, max_pages
 
 
 def save_data(id, deal, price, category):
@@ -41,7 +46,8 @@ def save_data(id, deal, price, category):
     :param category: category of the deal
     """
     deals = load_data()
-    deals[id] = {"user": session["USERNAME"], "name": deal, "price": price, "category": category, "date": str(date), "voting": {}}
+    deals[id] = {"user": session["USERNAME"], "name": deal, "price": price, "category": category, "date": str(date),
+                 "accepted": [], "rejected": []}
 
     with open('data/data.json', 'w') as db:
         json.dump(deals, db, indent=4)
@@ -66,13 +72,33 @@ def id_handler():
 
 
 def add_voting(deal_id, username, vote):
-    """
-    function to add a user voting to a specific deal and save to JSON
-    :param deal_id: unique id to identify the deal
-    :param username: who has voted?
-    :param vote: accepted or rejected?
-    """
     deals = load_data()
-    deals[deal_id]["voting"][username] = vote
+    deals[deal_id][vote].append(username)
     with open('data/data.json', 'w') as db:
         json.dump(deals, db, indent=4)
+
+
+def get_voting(deal_id):
+    deals = load_data()
+    list_accepted = deals[deal_id]["accepted"]
+    list_rejected = deals[deal_id]["rejected"]
+    list_accepted_length = len(deals[deal_id]["accepted"])
+    list_rejected_length = len(deals[deal_id]["rejected"])
+    return list_accepted, list_rejected, list_accepted_length, list_rejected_length
+
+
+def check_price(user_input):
+    try:
+        user_input = int(user_input)
+        return True
+    except ValueError:
+        try:
+            user_input = float(user_input)
+            return True
+        except ValueError:
+            return False
+
+
+
+
+

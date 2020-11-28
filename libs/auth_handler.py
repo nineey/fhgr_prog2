@@ -92,7 +92,7 @@ def save_new_user(username, password, firstname, lastname):
 
     # hash password for security reasons
     password = generate_password_hash(password)
-    users[username.lower()] = {"username": username, "password": password, "firstname": firstname, "lastname": lastname}
+    users[username.lower()] = {"username": username, "password": password, "firstname": firstname.capitalize(), "lastname": lastname.capitalize()}
 
     with open('data/users.json', 'w') as db:
         json.dump(users, db, indent=4)
