@@ -37,18 +37,29 @@ def load_data_range(start, count):
     return deals_to_return, max_pages
 
 
-def save_data(id, deal, price, category):
+def save_data(id, deal, new_price, old_price, link, category):
     """
     Saves data of a new deal into new or existing JSON-file
+    :param link:
+    :param new_price:
+    :param old_price:
     :param id: unique ID (given by id_handler)
     :param deal: name of the deal
-    :param price: price of the deal
     :param category: category of the deal
     """
     deals = load_data()
-    deals[id] = {"user": session["USERNAME"], "name": deal, "price": price, "category": category, "date": str(date),
+    discount = get_discount(new_price, old_price)
+    deals[id] = {"user": session["USERNAME"], "name": deal, "new_price": new_price, "old_price": old_price,
+                 "discount": discount, "link": link, "category": category, "date": str(date),
                  "accepted": [], "rejected": []}
 
+    with open('data/data.json', 'w') as db:
+        json.dump(deals, db, indent=4)
+
+
+def delete_entry_byID(id):
+    deals = load_data()
+    del deals[id]
     with open('data/data.json', 'w') as db:
         json.dump(deals, db, indent=4)
 
@@ -97,6 +108,13 @@ def check_price(user_input):
             return True
         except ValueError:
             return False
+
+
+def get_discount(new_price, old_price):
+    calc_diff = (int(new_price) / int(old_price))
+    discount = round((1 - calc_diff) * 100)
+    print(discount)
+    return f"{discount}%"
 
 
 

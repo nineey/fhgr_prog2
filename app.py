@@ -42,7 +42,7 @@ def register():
 @app.route("/")
 @login_required
 def index():
-    return render_template("voting.html", deals=load_data(), user=session["USERNAME"])
+    return render_template("voting.html", deals=load_data(), user=session["USERNAME"], categories=load_categories())
 
 
 @app.route("/all/<page>")
@@ -64,6 +64,13 @@ def all_deals_range(page):
                                nextPage=page_int + 1, prevPage=page_int - 1, max_pages=max_pages, page=int(page))
 
 
+@app.route('/delete/<deal_id>', methods=['GET', 'POST'])
+@login_required
+def delete_entry(deal_id):
+    delete_entry_byID(deal_id)
+    return redirect(url_for('all_deals_range', page=1))
+
+
 @app.route("/pdp/<id>")
 @login_required
 def show_deal(id):
@@ -75,6 +82,7 @@ def show_deal(id):
     fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
                       marker=dict(colors=colors))
     plotly_div = plotly.io.to_html(fig, include_plotlyjs=True, full_html=False)
+    # get_voting(id)[X] --> [0]:list_accepted, [1]list_rejected, [2]list_accepted_length, [3]list_rejected_length
     return render_template("detailpage.html", deal=deals[id], accepted=get_voting(id)[0], rejected=get_voting(id)[1],
                            accepted_counter=get_voting(id)[2], rejected_counter=get_voting(id)[3],
                            voting_pie=plotly_div)
@@ -99,14 +107,19 @@ def logout():
 @login_required
 def new_entry():
     if request.method == 'POST':
-        deal = request.form['post_deal']
-        price = request.form['post_price']
+        name = request.form['post_name']
+        new_price = request.form['post_price_new']
+        old_price = request.form['post_price_old']
         category = request.form['post_category']
-        if check_price(price) is False:
-            flash("Please enter a number for price (int or float)", "danger")
+        link = request.form['post_link']
+        if check_price(new_price) is False:
+            flash("Preise müssen eine Zahl sein (Ganzzahl oder Kommazahl)", "danger")
+            return redirect(url_for("new_entry"))
+        elif check_price(old_price) is False:
+            flash("Preise müssen eine Zahl sein (Ganzzahl oder Kommazahl)", "danger")
             return redirect(url_for("new_entry"))
         else:
-            save_data(id_handler(), deal, price, category)
+            save_data(id_handler(), name, new_price, old_price, link, category)
             flash("New deal successfully added!", "success")
             return redirect(url_for("new_entry"))
     return render_template("new_entry.html", categories=load_categories())
@@ -167,12 +180,6 @@ def add_user():
 def users_delete_user(username):
     delete_user(username)
     return redirect(url_for("users"))
-
-
-@app.route("/stats")
-@login_required
-def stats():
-    return render_template("stats.html")
 
 
 @app.errorhandler(404)
