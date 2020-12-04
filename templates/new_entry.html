@@ -6,25 +6,38 @@
 
     <!-- start content -->
 
-    <h1 class="mb-4">New Entry</h1>
+    <h1 class="mb-4">Neuer Eintrag</h1>
 
     <form action="/new_entry" method="POST">
         <div class="row">
-            <div class="col-6">
-                <input type="text" class="form-control" name="post_deal" placeholder="Name of Deal" required>
+            <div class="col">
+                <input type="text" class="form-control" name="post_name" placeholder="Produktname" required>
             </div>
-            <div class="col-6">
-                <input type="text" class="form-control" name="post_price" placeholder="Price" required>
-            </div>
+
         </div>
+    <div class="row mt-3">
+        <div class="col-6">
+                <input type="text" class="form-control" name="post_price_new" placeholder="Aktions-Preis" required>
+            </div>
+        <div class="col-6">
+                <input type="text" class="form-control" name="post_price_old" placeholder="Stattpreis" required>
+            </div>
+    </div>
+
+      <div class="row mt-3">
+        <div class="col">
+                <input type="text" class="form-control" name="post_link" placeholder="Herstellerlink" required>
+            </div>
+
+    </div>
 
 
         <div class="row mt-3">
             <div class="col-4">
                 <div class="form-group">
-                    <label>Kategorie</label>
+                    <label>Kategorie (<a href="{{ url_for('categories') }}">verwalten</a>)</label>
                     <select class="form-control" name="post_category" required>
-                        <option value="" selected disabled>Choose category</option>
+                        <option value="" selected disabled>Bitte auswählen</option>
                         {% for category in categories %}
                             <option value="{{ category }}">{{ category }}</option>
                         {% endfor %}
@@ -36,7 +49,7 @@
 
         </div>
 
-        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+        <button type="submit" class="btn btn-primary mb-3">Hinzufügen</button>
     </form>
 
 

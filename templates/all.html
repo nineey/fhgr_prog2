@@ -2,72 +2,74 @@
 {% extends "blocks/base.html" %}
 
 
-{%  block content %}
+{% block content %}
 
     <!-- start content -->
 
 
-<h1>Overview</h1>
-    <div class="lead mb-5">All deals in the database</div>
+    <h1>Liste aller Produkte und Abstimmungen</h1>
+    <div class="lead mb-5">Hier sind alle Produkte sichtbar. Klicke auf Details für die Abstimmungsergebnisse.</div>
 
 
     <div class="row mb-3">
 
 
-    {% if max_pages <= page %}
-        <a href="{{ url_for("all_deals_range", page=prevPage) }}"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
-                                <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
-
+        {% if max_pages <= page %}
+            <a href="{{ url_for("all_deals_range", page=prevPage) }}"><i
+                    class="fas fa-chevron-circle-left fa-3x"></i></a>
+            <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
 
 
         {% elif page == 1 %}
-                <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
+            <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
 
-         <a href="{{ url_for("all_deals_range", page=nextPage) }}"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
+            <a href="{{ url_for("all_deals_range", page=nextPage) }}"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
 
 
         {% else %}
-        <a href="{{ url_for("all_deals_range", page=prevPage) }}"><i class="fas fa-chevron-circle-left fa-3x"></i></a>
-                        <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
+            <a href="{{ url_for("all_deals_range", page=prevPage) }}"><i
+                    class="fas fa-chevron-circle-left fa-3x"></i></a>
+            <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
 
-         <a href="{{ url_for("all_deals_range", page=nextPage) }}"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
+            <a href="{{ url_for("all_deals_range", page=nextPage) }}"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
 
 
 
-    {% endif %}
+        {% endif %}
 
     </div>
 
-      <table id="overview_table" class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-        <th scope="col">added </th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Category</th>
-        <th scope="col">Details</th>
+    <table id="overview_table" class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">added</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Details</th>
+            <th scope="col">Löschen</th>
 
-    </tr>
-  </thead>
+        </tr>
+        </thead>
 
 
-   {% for key, value in deals.items() %}
+        {% for key, value in deals.items() %}
 
-       <tbody>
-    <tr>
-      <td>{{ key }}</td>
-        <td>{{ value["user"] }}</td>
-      <td>{{ value["name"] }}</td>
-      <td>{{ value["price"] }} CHF</td>
-      <td>{{ value["category"] }}</td>
-       <td><a href="{{ url_for("show_deal", id=key) }}"> <i class="fas fa-info-circle fa-2x"></i></a></td>
+            <tbody>
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value["user"] }}</td>
+                <td>{{ value["name"] }}</td>
+                <td>{{ value["price"] }} CHF</td>
+                <td>{{ value["category"] }}</td>
+                <td><a href="{{ url_for("show_deal", id=key) }}"> <i class="fas fa-info-circle fa-2x"></i></a></td>
+                <td><a href="{{ url_for("delete_entry", deal_id=key) }}"><i class="fas fa-trash fa-2x"></i></a></td>
+            </tr>
+            </tbody>
 
-    </tr>
-  </tbody>
-
-    {% endfor %}
-</table>
+        {% endfor %}
+    </table>
 
 
 
