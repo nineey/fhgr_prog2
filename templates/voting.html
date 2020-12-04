@@ -2,50 +2,74 @@
 {% extends "blocks/base.html" %}
 
 
-{%  block content %}
+{% block content %}
 
     <!-- start content -->
 
 
-<h1>Voting</h1>
+    <h1>Voting</h1>
     <div class="lead mb-5">All deals you have to vote for!</div>
 
+    <form action="/filter">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <select class="form-control" name="post_category" required>
+                        <option value="" selected>Kein Filter</option>
+                        {% for category in categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
 
-      <table id="overview_table" class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-        <th scope="col">added </th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Category</th>
-        <th scope="col">Details</th>
-        <th scope="col">Vote</th>
-    </tr>
-  </thead>
+                </div>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary mb-3">Filtern</button>
+            </div>
+        </div>
 
-
-   {% for id, value in deals.items() if user not in deals[id]["accepted"] + deals[id]["rejected"] %}
-
-       <tbody>
-    <tr>
-      <td>{{ id }}</td>
-        <td>{{ value["user"] }}</td>
-      <td>{{ value["name"] }}</td>
-      <td>{{ value["price"] }} CHF</td>
-      <td>{{ value["category"] }}</td>
-       <td><a href="{{ url_for("show_deal", id=id) }}"> <i class="fas fa-info-circle fa-2x"></i></a></td>
+    </form>
 
 
-        <td>
-            <a href="{{ url_for("voting_vote", deal_id=id, vote="accepted") }}"><i class="fas fa-thumbs-up fa-2x mr-3"></i></a>
-            <a href="{{ url_for("voting_vote", deal_id=id, vote="rejected") }}"><i class="fas fa-thumbs-down fa-2x"></i></a>
-        </td>
-    </tr>
-  </tbody>
+    <table id="overview_table" class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Produkt</th>
+            <th scope="col">Aktionspreis</th>
+            <th scope="col">Stattpreis</th>
+            <th scope="col">Rabatt</th>
+            <th scope="col">Kategorie</th>
+            <th scope="col">Details</th>
+            <th scope="col">Voting</th>
+        </tr>
+        </thead>
 
-    {% endfor %}
-</table>
+
+        {% for id, value in deals.items() if user not in deals[id]["accepted"] + deals[id]["rejected"] %}
+
+            <tbody>
+            <tr>
+                <td>{{ id }}</td>
+                <td>{{ value["name"] }}</td>
+                <td>{{ value["new_price"] }} CHF</td>
+                <td>{{ value["old_price"] }} CHF</td>
+                <td>{{ value["discount"] }}</td>
+                <td>{{ value["category"] }}</td>
+                <td><a href="{{ url_for("show_deal", id=id) }}"> <i class="fas fa-info-circle fa-2x"></i></a></td>
+
+
+                <td>
+                    <a href="{{ url_for("voting_vote", deal_id=id, vote="accepted") }}"><i
+                            class="fas fa-thumbs-up fa-2x mr-3"></i></a>
+                    <a href="{{ url_for("voting_vote", deal_id=id, vote="rejected") }}"><i
+                            class="fas fa-thumbs-down fa-2x"></i></a>
+                </td>
+            </tr>
+            </tbody>
+
+        {% endfor %}
+    </table>
 
 
     <!-- end content -->

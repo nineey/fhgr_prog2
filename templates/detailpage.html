@@ -2,42 +2,102 @@
 {% extends "blocks/base.html" %}
 
 
-{%  block content %}
+{% block content %}
 
     <!-- start content -->
 
 
-<h1>Detailpage</h1>
-    <p>Name of the deal: <br>{{ deal["name"] }}</p>
-    <p>Price: <br>{{ deal["price"] }}</p>
+    <h1>Detailpage</h1>
+
+    <div class="row mt-5">
+    <div class="col-md-2 font-weight-bold"><div>Produktname</div></div>
+    <div class="col-md-2"><div>{{ deal["name"] }}</div></div>
+    </div>
+
+    <div class="row mt-2">
+    <div class="col-md-2 font-weight-bold"><div>Aktions-Preis</div></div>
+    <div class="col-md-2"><div>{{ deal["new_price"] }} CHF</div></div>
+    </div>
+
+    <div class="row mt-2">
+    <div class="col-md-2 font-weight-bold"><div>Originalpreis</div></div>
+    <div class="col-md-2"><div>{{ deal["old_price"] }} CHF</div></div>
+    </div>
+
+    <div class="row mt-2">
+    <div class="col-md-2 font-weight-bold"><div>Rabatt</div></div>
+    <div class="col-md-2"><div>{{ deal["discount"] }}</div></div>
+    </div>
+
+    <div class="row mt-2">
+    <div class="col-md-2 font-weight-bold"><div>Kategorie</div></div>
+    <div class="col-md-2"><div>{{ deal["category"] }}</div></div>
+    </div>
+
+    <div class="row mt-2">
+    <div class="col-md-2 font-weight-bold"><div>Hinzugefügt von</div></div>
+    <div class="col-md-2"><div>{{ deal["user"] }}</div></div>
+    </div>
+
+    <div class="row mt-2">
+    <div class="col-md-2 font-weight-bold"><div>Hinzugefügt am</div></div>
+    <div class="col-md-2"><div>{{ deal["date"] }}</div></div>
+    </div>
+
+    <div class="row mt-2 mb-5">
+    <div class="col-md-2 font-weight-bold"><div>Website</div></div>
+    <div class="col-md-2"><a href="{{ deal["link"] }}" target="_blank">Link</a></div>
+    </div>
 
 
     <h2>Voting</h2>
 
-
-
     <div class="row">
-    <div class="col-6">{{ voting_pie|safe }}</div>
-{% if accepted + rejected %}
-    <div class="col">
-    <p>Accepted:</p>
-    {{ accepted_counter }}
-    {% for user in accepted %}
-    <li>{{ user }}</li>
-    {% endfor %}
-    </div>
 
-    <div class="col">
-    <p>Rejected:</p>
-    {{ rejected_counter }}
-    {% for user in rejected %}
-    <li>{{ user }}</li>
-    {% endfor %}
-    </div>
+        {% if accepted + rejected %}
+            <div class="col-md-3">
 
-    {% else %}
-    <p>no voting yet</p>
-    {% endif %}
+                <table id="overview_table" class="table">
+                    <thead>
+                    <tr>
+                        <th>Accepted</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in accepted %}
+                        <tr>
+                            <td>{{ user }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="col-md-3">
+              <table id="overview_table" class="table">
+                    <thead>
+                    <tr>
+                        <th>Rejected</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in rejected %}
+                        <tr>
+                            <td>{{ user }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="col-md-6 lg-mt-n5">{{ voting_pie|safe }}</div>
+
+        {% else %}
+            <div class="col lead">no votings yet</div>
+
+        {% endif %}
     </div>
 
     <!-- end content -->
