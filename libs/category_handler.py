@@ -16,7 +16,7 @@ def save_category(category):
     except:
         categories = []
 
-    categories.append(category)
+    categories.append(category.capitalize())
 
     with open('data/categories.json', 'w') as file:
         json.dump(categories, file)
@@ -54,7 +54,7 @@ def check_category(category):
     :return: if category already exist, return False
     """
     categories = load_categories()
-    if category.lower() in categories:
+    if category.capitalize() in categories:
         return False
     else:
         pass
