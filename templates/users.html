@@ -8,15 +8,16 @@
 
 
     <h1>Users</h1>
-    <p>Delete a user or add a new one</p>
+    <div class="lead mb-5">Benutzer hinzufügen oder löschen.</div>
+
 
     <table id="overview_table" class="table">
         <thead>
         <tr>
             <th scope="col">Username</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Delete</th>
+            <th scope="col">Vorname</th>
+            <th scope="col">Nachname</th>
+            <th scope="col">Löschen</th>
         </tr>
         </thead>
 
@@ -35,7 +36,7 @@
 
     <!-- section: add new user -->
 
-    <h2 class="mt-5">New user</h2>
+    <h2 class="mt-5">User hinzufügen</h2>
 
     <form action="/users/add" method="POST">
         <div class="row">
@@ -43,20 +44,20 @@
                 <input type="text" class="form-control" name="input_username" placeholder="Username" required>
             </div>
             <div class="col-6">
-                <input type="password" class="form-control" name="input_password" placeholder="Password" required>
+                <input type="password" class="form-control" name="input_password" placeholder="Passwort" required>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-6">
-                <input type="text" class="form-control" name="input_firstname" placeholder="Firstname" required>
+                <input type="text" class="form-control" name="input_firstname" placeholder="Vorname" required>
             </div>
             <div class="col-6">
-                <input type="text" class="form-control" name="input_lastname" placeholder="Lastname" required>
+                <input type="text" class="form-control" name="input_lastname" placeholder="Nachname" required>
             </div>
         </div>
 
 
-        <button type="submit" class="btn btn-success mt-3 mb-3">Add user</button>
+        <button type="submit" class="btn btn-success mt-3 mb-5">User hinzufügen</button>
     </form>
 
 <!-- end of section -->

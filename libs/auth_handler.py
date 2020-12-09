@@ -4,16 +4,15 @@ Contains everything related to login and user handling.
 
 import functools
 import json
-#source: https://www.programcreek.com/python/example/58659/werkzeug.security.check_password_hash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import session, redirect, url_for, request
 
 
 def login_required(func):
     """
-    function to handle access to protected pages.
+    Handle access to protected pages.
     Add "@login_required" to app_route for protection
-    source: https://blog.tecladocode.com/protecting-endpoints-in-flask-apps-by-requiring-login/
+    Source: https://blog.tecladocode.com/protecting-endpoints-in-flask-apps-by-requiring-login/
     """
     @functools.wraps(func)
     def secure_function(*args, **kwargs):
@@ -26,9 +25,9 @@ def login_required(func):
 
 def check_login(username, password):
     """
-    function checks the user inputs for login and sets the session
-    :param username: user input for username
-    :param password: user input for password
+    Check the entered login credentials and set username into the session
+    :param username: User input for username
+    :param password: User input for password
     :return: "True", if login is correct / redirect to login page, if login wrong
     """
     users = load_users()
@@ -50,8 +49,6 @@ def check_login(username, password):
         return redirect(request.url)
 
 
-
-# get users
 def load_users():
     """
     function loads users from JSON-File
@@ -83,7 +80,11 @@ def delete_user(username):
 
 
 def save_new_user(username, password, firstname, lastname):
-
+    """
+    Save a user to new or existing JSON-file
+    Hash the password before saving.
+    Source: https://www.programcreek.com/python/example/58659/werkzeug.security.check_password_hash
+    """
     try:
         with open('data/users.json', 'r') as db:
             users = json.load(db)
@@ -99,6 +100,11 @@ def save_new_user(username, password, firstname, lastname):
 
 
 def check_username(username):
+    """
+    Check if username is already taken.
+    :param username: Username which was entered in the form
+    :return: String "taken" if username is taken, otherwise do nothing
+    """
     users = load_users()
     if username.lower() in users.keys():
         return "taken"

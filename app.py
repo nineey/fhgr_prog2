@@ -7,11 +7,16 @@ from libs.data_handler import *
 
 app = Flask(__name__)
 # secret key for session based stuff like login and flash. should be more secret in real project.
-app.config["SECRET_KEY"] = "ThisIsMyVerySecretKey"
+app.config["SECRET_KEY"] = "1234ThisIsTheVerySecretKeyOfNineey4321"
 
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
+    """
+    Show the login page and check user login.
+    :return: First, template "login.html".
+            If given login is valid it redirects to voting page.
+    """
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
@@ -24,6 +29,10 @@ def login():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Part of the login page. User can register himself for the service.
+    :return: Template "login.html"
+    """
     if request.method == 'POST':
         username = request.form['input_username']
         password = request.form['input_password']
@@ -39,15 +48,25 @@ def register():
     return render_template("login.html")
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 @login_required
 def index():
+    """
+    Start of the applicaiton after login
+    :return: Redirect to voting page
+    """
     return render_template("voting.html", deals=load_data(), user=session["USERNAME"], categories=load_categories())
+
 
 
 @app.route("/all/<page>")
 @login_required
 def all_deals_range(page):
+    """
+    Show all deals in a list with pagination
+    :param page: Number of the current page (10 entries per page)
+    :return: Load template "all.html" with paginated list of all deals
+    """
     count = 10
     page_int = int(page)
     page_int_for_data = page_int - 1
@@ -67,13 +86,23 @@ def all_deals_range(page):
 @app.route('/delete/<deal_id>', methods=['GET', 'POST'])
 @login_required
 def delete_entry(deal_id):
+    """
+    Allow to delete a deal.
+    :param deal_id: identification of the deal
+    :return: redirect to referred page
+    """
     delete_entry_byID(deal_id)
-    return redirect(url_for('all_deals_range', page=1))
+    return redirect(request.referrer)
 
 
 @app.route("/pdp/<id>")
 @login_required
 def show_deal(id):
+    """
+    Show the detailpage of a choosen deal.
+    :param id: Idenfitication number of the deal.
+    :return: Load template "detailpage.html" with deal data
+    """
     deals = load_data()
     labels = ['Accepted', 'Rejected']
     colors = ['green', 'red']
@@ -83,7 +112,7 @@ def show_deal(id):
                       marker=dict(colors=colors))
     plotly_div = plotly.io.to_html(fig, include_plotlyjs=True, full_html=False)
     # get_voting(id)[X] --> [0]:list_accepted, [1]list_rejected, [2]list_accepted_length, [3]list_rejected_length
-    return render_template("detailpage.html", deal=deals[id], accepted=get_voting(id)[0], rejected=get_voting(id)[1],
+    return render_template("detailpage.html", deal=deals[id], deal_id=id, categories=load_categories(), accepted=get_voting(id)[0], rejected=get_voting(id)[1],
                            accepted_counter=get_voting(id)[2], rejected_counter=get_voting(id)[3],
                            voting_pie=plotly_div)
 
@@ -91,14 +120,24 @@ def show_deal(id):
 @app.route("/voting/<vote>/<deal_id>")
 @login_required
 def voting_vote(deal_id, vote):
+    """
+    Allows the user to vote for the deal.
+    :param deal_id: identifier for the deal
+    :param vote: accept / reject
+    :return: redirects to referred page
+    """
     username = session["USERNAME"]
     add_voting(deal_id, username, vote)
-    return redirect(url_for("index"))
+    return redirect(request.referrer)
 
 
 @app.route("/logout")
 @login_required
 def logout():
+    """
+    Logout function. Pops the session.
+    :return: Redirects to login page.
+    """
     session.pop("USERNAME", None)
     return redirect(url_for("login"))
 
@@ -108,53 +147,87 @@ def logout():
 def new_entry():
     if request.method == 'POST':
         name = request.form['post_name']
+        producer = request.form['post_producer']
         new_price = request.form['post_price_new']
         old_price = request.form['post_price_old']
         category = request.form['post_category']
         link = request.form['post_link']
-        if check_price(new_price) is False:
-            flash("Preise müssen eine Zahl sein (Ganzzahl oder Kommazahl)", "danger")
-            return redirect(url_for("new_entry"))
-        elif check_price(old_price) is False:
-            flash("Preise müssen eine Zahl sein (Ganzzahl oder Kommazahl)", "danger")
+        if check_url_input(link) is False:
+            flash("Bitte eine gültige URL eingeben", "danger")
             return redirect(url_for("new_entry"))
         else:
-            save_data(id_handler(), name, new_price, old_price, link, category)
-            flash("New deal successfully added!", "success")
-            return redirect(url_for("new_entry"))
+            pass
+        # if check_price(new_price) is False or check_price(old_price) is False:
+           # flash("Preise müssen eine Zahl sein (Ganzzahl oder Kommazahl)", "danger")
+           # return redirect(url_for("new_entry"))
+        #else:
+        save_new_deal(id_handler(), name, producer, new_price, old_price, link, category)
+        flash("New deal successfully added!", "success")
+        return redirect(url_for("new_entry"))
     return render_template("new_entry.html", categories=load_categories())
+
+
+@app.route('/update_deal/<id>', methods=['GET', 'POST'])
+@login_required
+def update_deal(id):
+    if request.method == 'POST':
+        name = request.form['post_name']
+        producer = request.form['post_producer']
+        new_price = request.form['post_price_new']
+        old_price = request.form['post_price_old']
+        category = request.form['post_category']
+        link = request.form['post_link']
+        update_deal_data(id, name, producer, new_price, old_price, link, category)
+        return redirect(url_for("show_deal", id=id))
 
 
 @app.route('/categories')
 @login_required
 def categories():
+    """
+    Shows a list of all categories.
+    :return: Load template "categories.html"
+    """
     return render_template("categories.html", categories=load_categories())
 
 
 @app.route('/category/add', methods=['GET', 'POST'])
 @login_required
 def new_category():
+    """
+    Form to add a new category.
+    :return: Redirect to referred page.
+    """
     if request.method == 'POST':
         category = request.form['post_category']
         if check_category(category) is False:
             flash("Category already exists. Please try again.", "warning")
-            return redirect(url_for("categories"))
+            return redirect(request.referrer)
         else:
             save_category(category)
             flash("Category successfully added!", "success")
-            return redirect(url_for("categories"))
+            return redirect(request.referrer)
 
 
 @app.route('/category/delete/<category>')
 @login_required
 def categories_delete_category(category):
+    """
+    Allows to delete a category.
+    :param category: Name of the category.
+    :return: Redirect to referred page.
+    """
     delete_category(category)
-    return redirect(url_for("categories"))
+    return redirect(request.referrer)
 
 
 @app.route("/users")
 @login_required
 def users():
+    """
+    Show a list of all users.
+    :return: Template "users.html"
+    """
     return render_template("users.html", users=load_users())
 
 
@@ -178,13 +251,21 @@ def add_user():
 @app.route("/users/delete/<username>")
 @login_required
 def users_delete_user(username):
+    """
+    Allows to delete a user.
+    :param username: Username of the user
+    :return: Redirect vo referred page
+    """
     delete_user(username)
-    return redirect(url_for("users"))
+    return redirect(request.referrer)
 
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html")
+    if "USERNAME" not in session:
+        return redirect(url_for("login"))
+    else:
+        return render_template("404.html")
 
 
 if __name__ == "__main__":

@@ -1,37 +1,45 @@
-<nav class="navbar navbar-dark navbar-expand-lg bg-dark navbar-custom">
-    <div class="container"><a class="navbar-brand" href="{{ url_for("index") }}">Votery</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span class="navbar-toggler-icon"></span></button>
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark navbar-custom navbar-inverse">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for("index") }}">Votery</a>
+        <button data-toggle="collapse" class="navbar-toggler" data-target="#navbarResponsive"><span
+                class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="nav navbar-nav mr-auto">
-                    <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('index') }}">Voting</a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('index') }}">Voting</a>
+                </li>
 
-                  <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('all_deals_range', page=1) }}">All</a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('all_deals_range', page=1) }}">Alle Einträge</a>
+                </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('new_entry') }}">New Entry</a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('new_entry') }}">Neuer Eintrag</a>
+                </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('users') }}">Users</a>
-        </li>
-
-                  <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('categories') }}">Categories</a>
-        </li>
-
-
-                 <li class="nav-item ml-5 mt-1">
-            <div class="lead text-white">Current user: {{ session["USERNAME"] }}</div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt text-white"></i></a>
-        </li>
 
             </ul>
+            <ul class="nav navbar-nav ml-auto">
+ <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Verwaltung
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ url_for('categories') }}">Kategorien</a>
+                        <a class="dropdown-item" href="{{ url_for('users') }}">Users</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link">Konto ({{ session["USERNAME"] }})</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+
+
         </div>
     </div>
 </nav>

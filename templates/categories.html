@@ -7,14 +7,14 @@
     <!-- start content -->
 
 
-    <h1>Categories</h1>
-    <p>Add or remove a category</p>
+    <h1>Kategorien</h1>
+    <div class="lead mb-5">Kategorien hinzufügen oder löschen.</div>
 
     <table id="overview_table" class="table">
         <thead>
         <tr>
-            <th scope="col">Category</th>
-            <th scope="col">Delete</th>
+            <th scope="col">Kategorie</th>
+            <th scope="col">Löschen</th>
         </tr>
         </thead>
 
@@ -29,17 +29,17 @@
 
     <!-- section: add new category -->
 
-    <h2 class="mt-5">New category</h2>
+    <h2 class="mt-5">Neue Kategorie</h2>
 
     <form action="/category/add" method="POST">
         <div class="row">
             <div class="col-6">
-                <input type="text" class="form-control" name="post_category" placeholder="Name of Category" required>
+                <input type="text" class="form-control" name="post_category" placeholder="Bezeichnung" required>
             </div>
         </div>
 
 
-        <button type="submit" class="btn btn-success mt-3 mb-3">Add category</button>
+        <button type="submit" class="btn btn-success mt-3 mb-3">Kategorie hinzufügen</button>
     </form>
 
 <!-- end of section -->
