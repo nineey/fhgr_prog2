@@ -1,0 +1,205 @@
+{
+    "1": {
+        "user": "admin",
+        "name": "Galaxy S30",
+        "producer": "Samsung",
+        "new_price": "699",
+        "old_price": "899",
+        "discount": 22,
+        "link": "https://www.samsung.com/ch/smartphones/galaxy-s20/",
+        "category": "Multimedia",
+        "date": "08.12.2020",
+        "accepted": [
+            "admin",
+            "Simone"
+        ],
+        "rejected": [
+            "Livia"
+        ]
+    },
+    "2": {
+        "user": "admin",
+        "name": "EOS 90D",
+        "producer": "Canon",
+        "new_price": "629",
+        "old_price": "842",
+        "discount": 25,
+        "link": "https://www.canon.de/cameras/eos-90d/",
+        "category": "Multimedia",
+        "date": "08.12.2020",
+        "accepted": [
+            "admin",
+            "Livia"
+        ],
+        "rejected": [
+            "Simone"
+        ]
+    },
+    "3": {
+        "user": "Simone",
+        "name": "Lampe",
+        "producer": "Philips",
+        "new_price": "399",
+        "old_price": "499",
+        "discount": 20,
+        "link": "https://philips.com",
+        "category": "Home",
+        "date": "12.12.2020",
+        "accepted": [
+            "admin"
+        ],
+        "rejected": [
+            "Livia"
+        ]
+    },
+    "4": {
+        "user": "Simone",
+        "name": "asdf",
+        "producer": "asdf",
+        "new_price": "56",
+        "old_price": "57",
+        "discount": 2,
+        "link": "https://kljhsadch.ch",
+        "category": "Home",
+        "date": "12.12.2020",
+        "accepted": [
+            "admin",
+            "Livia"
+        ],
+        "rejected": []
+    },
+    "5": {
+        "user": "Simone",
+        "name": "asdf",
+        "producer": "asdf",
+        "new_price": "56",
+        "old_price": "57",
+        "discount": 2,
+        "link": "https://kljhsadch.ch",
+        "category": "Home",
+        "date": "12.12.2020",
+        "accepted": [
+            "admin"
+        ],
+        "rejected": [
+            "Livia"
+        ]
+    },
+    "6": {
+        "user": "Simone",
+        "name": "asdf",
+        "producer": "asdf",
+        "new_price": "56",
+        "old_price": "57",
+        "discount": 2,
+        "link": "https://kljhsadch.ch",
+        "category": "Home",
+        "date": "12.12.2020",
+        "accepted": [
+            "admin"
+        ],
+        "rejected": []
+    },
+    "7": {
+        "user": "Simone",
+        "name": "asdf",
+        "producer": "asdf",
+        "new_price": "56",
+        "old_price": "57",
+        "discount": 2,
+        "link": "https://kljhsadch.ch",
+        "category": "Home",
+        "date": "12.12.2020",
+        "accepted": [
+            "admin",
+            "Livia"
+        ],
+        "rejected": []
+    },
+    "8": {
+        "user": "Simone",
+        "name": "asdf",
+        "producer": "asdf",
+        "new_price": "56",
+        "old_price": "57",
+        "discount": 2,
+        "link": "https://kljhsadch.ch",
+        "category": "Home",
+        "date": "12.12.2020",
+        "accepted": [
+            "admin"
+        ],
+        "rejected": [
+            "Livia"
+        ]
+    },
+    "9": {
+        "user": "admin",
+        "name": "ljn",
+        "producer": "kjhb",
+        "new_price": "876",
+        "old_price": "5569.3",
+        "discount": 84,
+        "link": "http://google.com",
+        "category": "Multimedia",
+        "date": "12.12.2020",
+        "accepted": [
+            "admin"
+        ],
+        "rejected": []
+    },
+    "10": {
+        "user": "admin",
+        "name": "asdf",
+        "producer": "sadf",
+        "new_price": "90",
+        "old_price": "100",
+        "discount": 10,
+        "link": "http://google.com",
+        "category": "Multimedia",
+        "date": "12.12.2020",
+        "accepted": [
+            "admin"
+        ],
+        "rejected": []
+    },
+    "11": {
+        "user": "admin",
+        "name": "yxcv",
+        "producer": "xycv",
+        "new_price": "100",
+        "old_price": "90",
+        "discount": -11,
+        "link": "http://google.com",
+        "category": "Gadgets",
+        "date": "12.12.2020",
+        "accepted": [],
+        "rejected": []
+    },
+    "13": {
+        "user": "admin",
+        "name": "asdf",
+        "producer": "asdf",
+        "new_price": "99",
+        "old_price": "98",
+        "discount": -1,
+        "link": "http://test.com",
+        "category": "Home",
+        "date": "12.12.2020",
+        "accepted": [],
+        "rejected": []
+    },
+    "14": {
+        "user": "admin",
+        "name": "sadf",
+        "producer": "asdf",
+        "new_price": "2",
+        "old_price": "3",
+        "discount": 33,
+        "link": "http://test.com",
+        "category": "Home",
+        "date": "12.12.2020",
+        "accepted": [],
+        "rejected": []
+    }
+}

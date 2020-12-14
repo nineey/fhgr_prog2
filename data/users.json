@@ -1,0 +1,20 @@
+{
+    "admin": {
+        "username": "admin",
+        "password": "pbkdf2:sha256:150000$0tYIReQp$e36058bcc065ab561a522f179938243c434a4f1aa83917fe40d5448be2f8d558",
+        "firstname": "\u2013",
+        "lastname": "\u2013"
+    },
+    "nicolas": {
+        "username": "Nicolas",
+        "password": "pbkdf2:sha256:150000$w5nToVjh$5251828f558e309f86d1fb75bd978d94d844482e85bbc468389938a1ba5d6345",
+        "firstname": "Nicolas",
+        "lastname": "SecretLastName"
+    },
+    "hello": {
+        "username": "hello",
+        "password": "pbkdf2:sha256:150000$xh5H177W$9234b2435aaa491584ea2acd435a1caa8f445f577536ff92c1d8ef65d1bd6c8a",
+        "firstname": "hello",
+        "lastname": "hello"
+    }
+}
