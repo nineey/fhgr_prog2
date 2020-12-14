@@ -29,6 +29,7 @@ def check_login(username, password):
     :param username: User input for username
     :param password: User input for password
     :return: "True", if login is correct / redirect to login page, if login wrong
+    Source: https://www.programcreek.com/python/example/58659/werkzeug.security.check_password_hash
     """
     users = load_users()
 
