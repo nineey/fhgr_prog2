@@ -22,7 +22,7 @@
             <tbody>
             <tr>
                 <td scope="row">{{ category }}</td>
-                    <td><a href="{{ url_for("categories_delete_category", category=category) }}"><i class="fas fa-trash fa-2x"></i></a></td>
+                    <td><a href="{{ url_for("categories_delete_category", category=category) }}"><i class="fas fa-trash fa-2x color-red"></i></a></td>
             </tbody>
         {% endfor %}
     </table>
