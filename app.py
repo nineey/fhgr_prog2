@@ -24,7 +24,7 @@ def login():
             return redirect(url_for('index'))
         else:
             flash("Username oder Passwort ist falsch. Bitte nochmals probieren.", "warning")
-    return render_template("login.html")
+    return render_template("login.html", title="Login")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -55,7 +55,7 @@ def index():
     Start of the applicaiton after login
     :return: Redirect to voting page
     """
-    return render_template("voting.html", deals=load_data(), user=session["USERNAME"], categories=load_categories())
+    return render_template("voting.html", title="Voting", deals=load_data(), user=session["USERNAME"], categories=load_categories())
 
 
 @app.route("/all/<page>")
@@ -78,7 +78,7 @@ def all_deals_range(page):
     elif int(page) < 1:
         return redirect(url_for("all_deals_range", page=1))
     else:
-        return render_template("all.html", deals=load_data_range(start, count)[0], user=session["USERNAME"],
+        return render_template("all.html", title="Overview", deals=load_data_range(start, count)[0], user=session["USERNAME"],
                                nextPage=page_int + 1, prevPage=page_int - 1, max_pages=max_pages, page=int(page))
 
 
@@ -114,7 +114,7 @@ def show_deal(id):
                       marker=dict(colors=colors))
         plotly_div = plotly.io.to_html(fig, include_plotlyjs=True, full_html=False)
         # get_voting(id)[X] --> [0]:list_accepted, [1]list_rejected, [2]list_accepted_length, [3]list_rejected_length
-        return render_template("detailpage.html", deal=deals[id], deal_id=id, categories=load_categories(),
+        return render_template("detailpage.html", title="Details", deal=deals[id], deal_id=id, categories=load_categories(),
                             accepted=get_voting(id)[0], rejected=get_voting(id)[1],
                             accepted_counter=get_voting(id)[2], rejected_counter=get_voting(id)[3],
                             voting_pie=plotly_div)
@@ -167,7 +167,7 @@ def new_entry():
             save_new_deal(id_handler(), name, producer, new_price, old_price, link, category)
             flash("Neuer Deal hinzugefügt!", "success")
             return redirect(url_for("new_entry"))
-    return render_template("new_entry.html", categories=load_categories())
+    return render_template("new_entry.html", title="Neuer Eintrag", categories=load_categories())
 
 
 @app.route('/update_deal/<id>', methods=['GET', 'POST'])
@@ -191,7 +191,7 @@ def categories():
     Shows a list of all categories.
     :return: Load template "categories.html"
     """
-    return render_template("categories.html", categories=load_categories())
+    return render_template("categories.html", title="Kategorien", categories=load_categories())
 
 
 @app.route('/category/add', methods=['GET', 'POST'])
@@ -231,7 +231,7 @@ def users():
     Show a list of all users.
     :return: Template "users.html"
     """
-    return render_template("users.html", users=load_users())
+    return render_template("users.html", title="Users", users=load_users())
 
 
 @app.route("/users/add", methods=['GET', 'POST'])
@@ -273,7 +273,7 @@ def not_found(e):
     if "USERNAME" not in session:
         return redirect(url_for("login"))
     else:
-        return render_template("404.html")
+        return render_template("404.html", title="Error 404")
 
 
 if __name__ == "__main__":
