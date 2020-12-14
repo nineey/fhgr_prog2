@@ -50,6 +50,15 @@ def load_data_range(start, count):
     return deals_to_return, max_pages
 
 
+def check_key(key):
+    deals = load_data()
+    keys = deals.keys()
+    if key in keys:
+        return True
+    else:
+        return False
+
+
 def save_new_deal(id, name, producer, new_price, old_price, link, category):
     """
     Save data of a new deal into new or existing JSON-file
@@ -145,18 +154,13 @@ def get_voting(deal_id):
     list_rejected_length = len(deals[deal_id]["rejected"])
     return list_accepted, list_rejected, list_accepted_length, list_rejected_length
 
-"""
-def check_price(user_input):
-    try:
-        user_input = int(user_input)
-        return True
-    except ValueError:
-        try:
-            user_input = float(user_input)
-            return True
-        except ValueError:
-            return False
-"""
+
+def check_price(new_price, old_price):
+    if float(new_price) >= float(old_price):
+        return False
+    else:
+        pass
+
 
 def get_discount(new_price, old_price):
     """

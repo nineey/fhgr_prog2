@@ -23,7 +23,7 @@ def login():
         if check_login(username, password) is True:
             return redirect(url_for('index'))
         else:
-            flash("Incorrect username or password. Please try again.", "warning")
+            flash("Username oder Passwort ist falsch. Bitte nochmals probieren.", "warning")
     return render_template("login.html")
 
 
@@ -39,11 +39,11 @@ def register():
         firstname = request.form['input_firstname']
         lastname = request.form['input_lastname']
         if check_username(username) == "taken":
-            flash("Username already taken. Please try again.", "danger")
+            flash("Der Username ist bereits vergeben.", "danger")
             redirect(url_for("register"))
         else:
             save_new_user(username, password, firstname, lastname)
-            flash("Successfully registered. Enter your login below.", "success")
+            flash("Erfolgreich registriert! Du kannst dich jetzt einloggen.", "success")
             return redirect(url_for("login"))
     return render_template("login.html")
 
@@ -56,7 +56,6 @@ def index():
     :return: Redirect to voting page
     """
     return render_template("voting.html", deals=load_data(), user=session["USERNAME"], categories=load_categories())
-
 
 
 @app.route("/all/<page>")
@@ -103,18 +102,22 @@ def show_deal(id):
     :param id: Idenfitication number of the deal.
     :return: Load template "detailpage.html" with deal data
     """
-    deals = load_data()
-    labels = ['Accepted', 'Rejected']
-    colors = ['green', 'red']
-    values = [get_voting(id)[2], get_voting(id)[3]]
-    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
-    fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
+    if check_key(id) is False:
+        return render_template("404.html")
+    else:
+        deals = load_data()
+        labels = ['Accepted', 'Rejected']
+        colors = ['green', 'red']
+        values = [get_voting(id)[2], get_voting(id)[3]]
+        fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+        fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
                       marker=dict(colors=colors))
-    plotly_div = plotly.io.to_html(fig, include_plotlyjs=True, full_html=False)
-    # get_voting(id)[X] --> [0]:list_accepted, [1]list_rejected, [2]list_accepted_length, [3]list_rejected_length
-    return render_template("detailpage.html", deal=deals[id], deal_id=id, categories=load_categories(), accepted=get_voting(id)[0], rejected=get_voting(id)[1],
-                           accepted_counter=get_voting(id)[2], rejected_counter=get_voting(id)[3],
-                           voting_pie=plotly_div)
+        plotly_div = plotly.io.to_html(fig, include_plotlyjs=True, full_html=False)
+        # get_voting(id)[X] --> [0]:list_accepted, [1]list_rejected, [2]list_accepted_length, [3]list_rejected_length
+        return render_template("detailpage.html", deal=deals[id], deal_id=id, categories=load_categories(),
+                            accepted=get_voting(id)[0], rejected=get_voting(id)[1],
+                            accepted_counter=get_voting(id)[2], rejected_counter=get_voting(id)[3],
+                            voting_pie=plotly_div)
 
 
 @app.route("/voting/<vote>/<deal_id>")
@@ -157,13 +160,13 @@ def new_entry():
             return redirect(url_for("new_entry"))
         else:
             pass
-        # if check_price(new_price) is False or check_price(old_price) is False:
-           # flash("Preise müssen eine Zahl sein (Ganzzahl oder Kommazahl)", "danger")
-           # return redirect(url_for("new_entry"))
-        #else:
-        save_new_deal(id_handler(), name, producer, new_price, old_price, link, category)
-        flash("New deal successfully added!", "success")
-        return redirect(url_for("new_entry"))
+        if check_price(new_price, old_price) is False:
+            flash("Der Aktionspreis muss kleider als der Stattpreis sein!", "danger")
+            return redirect(url_for("new_entry"))
+        else:
+            save_new_deal(id_handler(), name, producer, new_price, old_price, link, category)
+            flash("Neuer Deal hinzugefügt!", "success")
+            return redirect(url_for("new_entry"))
     return render_template("new_entry.html", categories=load_categories())
 
 
@@ -201,11 +204,11 @@ def new_category():
     if request.method == 'POST':
         category = request.form['post_category']
         if check_category(category) is False:
-            flash("Category already exists. Please try again.", "warning")
+            flash("Kategorie existiert bereits. Wähle eine andere Bezeichnung.", "warning")
             return redirect(request.referrer)
         else:
             save_category(category)
-            flash("Category successfully added!", "success")
+            flash("Die Kategorie wurde erfolgreich hinzugefügt!", "success")
             return redirect(request.referrer)
 
 
@@ -240,7 +243,7 @@ def add_user():
         firstname = request.form['input_firstname']
         lastname = request.form['input_lastname']
         if check_username(username) == "taken":
-            flash("Username already taken. Please try again.")
+            flash("Der Username existiert bereits!")
             redirect(url_for("users"))
         else:
             save_new_user(username, password, firstname, lastname)
@@ -262,6 +265,11 @@ def users_delete_user(username):
 
 @app.errorhandler(404)
 def not_found(e):
+    """
+    Source: https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/
+    :param e:
+    :return:
+    """
     if "USERNAME" not in session:
         return redirect(url_for("login"))
     else:

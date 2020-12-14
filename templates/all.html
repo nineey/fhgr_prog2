@@ -16,9 +16,13 @@
 
 
         {% if max_pages <= page %}
+            {% if max_pages > 1 %}
             <a href="{{ url_for("all_deals_range", page=prevPage) }}"><i
                     class="fas fa-chevron-circle-left fa-3x"></i></a>
+                    <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
+            {% else %}
             <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
+                {% endif %}
 
 
         {% elif page == 1 %}
@@ -35,8 +39,8 @@
             <a href="{{ url_for("all_deals_range", page=nextPage) }}"><i class="fas fa-chevron-circle-right fa-3x"></i></a>
 
 
-
         {% endif %}
+
 
     </div>
 
