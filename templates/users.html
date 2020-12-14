@@ -28,7 +28,7 @@
                 <td>{{ user["firstname"] }} </td>
                 <td>{{ user["lastname"] }}</td>
                 {% if not user["username"] == "admin" %}
-                    <td><a href="{{ url_for("users_delete_user", username=user["username"]) }}"><i class="fas fa-trash fa-2x"></i></a></td>
+                    <td><a href="{{ url_for("users_delete_user", username=user["username"]) }}"><i class="fas fa-trash fa-2x color-red"></i></a></td>
                 {% endif %}
             </tbody>
         {% endfor %}
