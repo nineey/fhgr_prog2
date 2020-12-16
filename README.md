@@ -38,13 +38,13 @@ Der Benutzer kann über das UI neue Produkte erfassen oder über die Detailsansi
 Die eingetragenen Daten werden im Ordner `data` ins das jeweilige JSON-File abgespeichert:
 
 **data.json**
- - Dict mit Produktdaten und Votings
+ - Dictionary mit Produktdaten und Votings
 
 **categories.json**
  - Liste mit allen Kategorien
 
 **users.json**
- - Dict mit verschlüsselten Login-Daten
+ - Dictionary mit Login-Daten
 
 ### Datenausgabe
 Die Daten werden entsprechend der URL, die der Benutzer aufruft, vom JSON gelesen. Im Anschluss werden die notwendigen Daten mittels Jinja2 im Front-End ausgegeben. 
@@ -52,4 +52,38 @@ Die Daten werden entsprechend der URL, die der Benutzer aufruft, vom JSON gelese
 ![UserFlow](docs/UseCaseVotery.png)
 
 ## Benutzeranleitung
-folgt...
+
+1. Einloggen oder neu registrieren. Für Demo-Zwecke kann der Admin-Account verwendet werden:   
+- Username: "Admin"  
+- Passwort: "admin"  
+  
+  
+![LoginPage](docs/01_login.png?s=100)  
+  
+2. Auf dieser Seite sieht der eingeloggte User alle Produkte, für welche er noch nicht abgestimmt hat. In der Spalte "Voting" kann er für oder gegen das Produkt stimmen. 
+  
+![Voting](docs/02_voting.png)  
+
+3. Unter dem Menü-Punkt ***Neuer Eintrag*** kann der Nutzer ein neues Produkt hinzufügen, wofür eine Abstimmung erstellt werden soll. 
+
+![NewProduct](docs/04_new.png)  
+
+4. Auf dieser Seite sieht der User alle in der Datenbank erfassten Produkte. Die Pagination zeigt jeweils 10 Produkte pro Seite. Durch Klick auf das Detail-Icon öffnet sich die Detailseite des gewählten Produktes. 
+  
+![AllProducts](docs/03_all.png)  
+
+   5. Auf der Detailseite eines Produktes sind sämtliche Informationen sichtbar. Zusätzlich sieht der Nutzer die Abstimmungsergebnisse als Tabelle und grafische Darstellung.  
+![Detailpage](docs/05_pdp.png)  
+
+6. Auf der Detailseite kann ein Produkt bearbeitet werden. Durch klick auf den Button "Bearbeiten" öffnet sich ein Dialog-Fenster zum Anpassen der Produktdaten. 
+  
+![Detailpage](docs/06_edit.png)  
+
+7. Unter dem Menü-Punkt ***Verwalten > Kategorien*** können Kategorien hinzugefügt oder entfernt werden. 
+  
+![Categories](docs/07_categories.png)  
+
+7. Unter dem Menü-Punkt ***Verwalten > Users*** können Benutzer hinzugefügt oder entfernt werden. 
+  
+![Users](docs/08_users.png)
+
