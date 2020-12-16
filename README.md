@@ -6,7 +6,7 @@ Dieses Projekt ist im Rahmen des Moduls *Programmierung 2* an der Fachhochschule
 In einem Team mit mehreren Mitarbeitern gibt es Abstimmungen über Produkte, mit denen Sonderaktionen durchgeführt werden sollen. Bis anhin fanden diese Abstimmungen per umständlichem Mail-Verkehr statt.   
   
 ## Projekt – Votery  
-Das Tool ***Votery*** unterstützt das Team bei beim Abstimmungsprozess, indem alle Produkte und zugehörige Abstimmungsergebnisse zentral gespeichert werden. Ein Login für ***Votery*** sorgt dafür, dass einfach für Produkte gevoted werden kann.   
+Das Tool ***Votery*** unterstützt das Team beim Abstimmungsprozess, indem alle Produkte und zugehörige Abstimmungsergebnisse zentral gespeichert werden. Ein Login für ***Votery*** sorgt dafür, dass einfach für Produkte gevoted werden kann.   
   
 ## Installation  
 Damit du ***Votery*** lokal starten kannst, benötigst du folgende Installationen (getestete Version):   
@@ -47,7 +47,9 @@ Die eingetragenen Daten werden im Ordner `data` ins das jeweilige JSON-File abge
  - Dict mit verschlüsselten Login-Daten
 
 ### Datenausgabe
-Die Daten werden entsprechend der URL, die der Benutzer aufruft, vom JSON gelesen. Im Anschluss werden die notwendigen Daten mittels Jinja im Front-End ausgegeben. 
+Die Daten werden entsprechend der URL, die der Benutzer aufruft, vom JSON gelesen. Im Anschluss werden die notwendigen Daten mittels Jinja2 im Front-End ausgegeben. 
+
+![UserFlow](docs/UseCaseVotery.png)
 
 ## Benutzeranleitung
 folgt...
