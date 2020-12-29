@@ -17,26 +17,26 @@
                     <a class="nav-link" href="{{ url_for('new_entry') }}">Neuer Eintrag</a>
                 </li>
 
+                <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('categories') }}">Kategorien</a>
+                </li>
+
 
             </ul>
             <ul class="nav navbar-nav ml-auto">
- <li class="nav-item dropdown">
+
+
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        Verwaltung
+                        Aktueller Benutzer: <b>{{ session["USERNAME"] }}</b>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ url_for('categories') }}">Kategorien</a>
-                        <a class="dropdown-item" href="{{ url_for('users') }}">Users</a>
+                        <a class="dropdown-item" href="{{ url_for('users') }}">Benutzer verwalten</a>
+                        <a class="dropdown-item color-red" href="{{ url_for('logout') }}">Logout</a>
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link">Konto ({{ session["USERNAME"] }})</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                </li>
             </ul>
 
 
