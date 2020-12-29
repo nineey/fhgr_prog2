@@ -114,7 +114,7 @@ def show_deal(id):
                       marker=dict(colors=colors))
         plotly_div = plotly.io.to_html(fig, include_plotlyjs=True, full_html=False)
         # get_voting(id)[X] --> [0]:list_accepted, [1]list_rejected, [2]list_accepted_length, [3]list_rejected_length
-        return render_template("detailpage.html", title="Details", deal=deals[id], deal_id=id, categories=load_categories(),
+        return render_template("detailpage.html", title="Details", deal=deals[id], deal_id=id, users=load_users(), categories=load_categories(),
                             accepted=get_voting(id)[0], rejected=get_voting(id)[1],
                             accepted_counter=get_voting(id)[2], rejected_counter=get_voting(id)[3],
                             voting_pie=plotly_div)

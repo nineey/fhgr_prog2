@@ -2,19 +2,49 @@
     "admin": {
         "username": "admin",
         "password": "pbkdf2:sha256:150000$0tYIReQp$e36058bcc065ab561a522f179938243c434a4f1aa83917fe40d5448be2f8d558",
-        "firstname": "\u2013",
+        "firstname": "Admin",
         "lastname": "\u2013"
     },
-    "nicolas": {
-        "username": "Nicolas",
-        "password": "pbkdf2:sha256:150000$w5nToVjh$5251828f558e309f86d1fb75bd978d94d844482e85bbc468389938a1ba5d6345",
+    "nineey": {
+        "username": "nineey",
+        "password": "pbkdf2:sha256:150000$Z4ACvM9T$e19e47321334fb8752a30e3d88496e3a37b9d606085905f099e6eb3a57e3fa27",
         "firstname": "Nicolas",
-        "lastname": "SecretLastName"
+        "lastname": "Neeser"
     },
-    "hello": {
-        "username": "hello",
-        "password": "pbkdf2:sha256:150000$xh5H177W$9234b2435aaa491584ea2acd435a1caa8f445f577536ff92c1d8ef65d1bd6c8a",
-        "firstname": "hello",
-        "lastname": "hello"
+    "seimen": {
+        "username": "seimen",
+        "password": "pbkdf2:sha256:150000$OZtE4y1V$569e6081e2f5af9d3a2f97a4683c7bae90fbb84c61860a3652a629ffefd3f17d",
+        "firstname": "Simone",
+        "lastname": "K\u00fchne"
+    },
+    "liivii": {
+        "username": "liivii",
+        "password": "pbkdf2:sha256:150000$UlNJFPqn$e68215b10f9849f2a0eb6bcae2a7ef9e16a30abc64c8b1d86d2bdd2c87a943f5",
+        "firstname": "Livia",
+        "lastname": "Hebeisen"
+    },
+    "blicki7000": {
+        "username": "blicki7000",
+        "password": "pbkdf2:sha256:150000$51NBFgfX$0f2f8c9bc8f839d590cbe2127eb5134633a61e48a8a792ca1227e9b41bbe1cca",
+        "firstname": "Lukas",
+        "lastname": "Blickenstorfer"
+    },
+    "sansi": {
+        "username": "sansi",
+        "password": "pbkdf2:sha256:150000$r3Ikj6R3$34a335fbe5e7a59e9164a1028ea64d3ce484d760da728179a5e9b4d1ba47ba5b",
+        "firstname": "Sandro",
+        "lastname": "Matter"
+    },
+    "hutti99": {
+        "username": "hutti99",
+        "password": "pbkdf2:sha256:150000$DmXYTsK2$c077b4a774a18230c989a6ecb94da754e3c526f46515b200a8934565f3b2e50d",
+        "firstname": "Nadine",
+        "lastname": "Hutter"
+    },
+    "tkmil": {
+        "username": "tkmil",
+        "password": "pbkdf2:sha256:150000$WT6Xdfpd$0fa2b6c3f7888d8471751c822db658a8785bc77318492affdb6fd759711239b3",
+        "firstname": "Thomas",
+        "lastname": "Kamber"
     }
 }
