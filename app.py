@@ -98,7 +98,7 @@ def delete_entry(deal_id):
 @login_required
 def show_deal(id):
     """
-    Show the detailpage of a choosen deal.
+    Show the detailpage of a chosen deal.
     :param id: Identification number of the deal
     :return: Load template "detailpage.html" with deal data
     """
