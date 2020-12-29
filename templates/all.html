@@ -9,7 +9,8 @@
 
     <h1>Liste aller Produkte und Abstimmungen</h1>
     <div class="lead mb-5">Hier sind alle Produkte sichtbar.
-        Klicke auf Details, um die Abstimmungsergebnisse zu sehen.</div>
+        Klicke auf Details, um die Abstimmungsergebnisse zu sehen.
+    </div>
 
 
     <div class="row mb-3">
@@ -17,12 +18,12 @@
 
         {% if max_pages <= page %}
             {% if max_pages > 1 %}
-            <a href="{{ url_for("all_deals_range", page=prevPage) }}"><i
-                    class="fas fa-chevron-circle-left fa-3x"></i></a>
-                    <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
+                <a href="{{ url_for("all_deals_range", page=prevPage) }}"><i
+                        class="fas fa-chevron-circle-left fa-3x"></i></a>
+                <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
             {% else %}
-            <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
-                {% endif %}
+                <div class="lead m-2">Page {{ page }} of {{ max_pages }}</div>
+            {% endif %}
 
 
         {% elif page == 1 %}
@@ -48,10 +49,9 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Hersteller</th>
             <th scope="col">Produkt</th>
-            <th scope="col">Rabatt</th>
             <th scope="col">Kategorie</th>
+            <th scope="col"><i class="fas fa-thumbs-up color-green"></i> | <i class="fas fa-thumbs-down color-red"></i></th>
             <th scope="col">Details</th>
             <th scope="col">Löschen</th>
 
@@ -63,17 +63,16 @@
 
             <tbody>
             <tr>
+
+
                 <td class="align-middle">{{ key }}</td>
-                <td class="align-middle">{{ value["producer"] }}</td>
-                <td class="align-middle">{{ value["name"] }}</td>
-                {% if value["discount"]|int < 10  %}
-                <td class="align-middle"><h4><span class="badge badge-danger">{{ value["discount"] }}%</span></h4></td>
-                {% else %}
-                <td class="align-middle"><h4><span class="badge badge-success">{{ value["discount"] }}%</span></h4></td>
-                {% endif %}
+                <td class="align-middle">{{ value["producer"] }} {{ value["name"] }}</td>
                 <td class="align-middle">{{ value["category"] }}</td>
-                <td class="align-middle"><a href="{{ url_for("show_deal", id=key) }}"> <i class="fas fa-info-circle fa-2x"></i></a></td>
-                <td class="align-middle"><a href="{{ url_for("delete_entry", deal_id=key) }}"><i class="fas fa-trash fa-2x color-red"></i></a></td>
+                <td class="align-middle">{{ value["accepted"]|length }} | {{ value["rejected"]|length }}</td>
+                <td class="align-middle"><a href="{{ url_for("show_deal", id=key) }}"> <i
+                        class="fas fa-info-circle fa-2x"></i></a></td>
+                <td class="align-middle"><a href="{{ url_for("delete_entry", deal_id=key) }}"><i
+                        class="fas fa-trash fa-2x color-red"></i></a></td>
             </tr>
             </tbody>
 
@@ -83,8 +82,3 @@
 
     <!-- end content -->
 {% endblock %}
-
-
-
-
-
