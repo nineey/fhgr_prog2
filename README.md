@@ -44,7 +44,7 @@ Die eingetragenen Daten werden im Ordner `data` ins das jeweilige JSON-File abge
  - Liste mit allen Kategorien
 
 **users.json**
- - Dictionary mit Login-Daten
+ - Dictionary mit verschlüsselten Login-Daten
 
 ### Datenausgabe
 Die Daten werden entsprechend der URL, die der Benutzer aufruft, vom JSON gelesen. Im Anschluss werden die notwendigen Daten mittels Jinja2 im Front-End ausgegeben. 
@@ -67,7 +67,7 @@ Auf der Seite ***Alle Einträge*** (rechts) sieht der User alle in der Datenbank
 ![Voting](docs/02_voting_all.png)  
 
 Auf der Detailseite (links) eines Produktes sind sämtliche Informationen sichtbar. Zusätzlich sieht der Nutzer die Abstimmungsergebnisse als Tabelle und grafische Darstellung.
-Durch klick auf den Button "Bearbeiten" öffnet sich ein Dialog-Fenster (rechts) zum Anpassen der Produktdaten.
+Durch Klick auf den Button "Bearbeiten" öffnet sich ein Dialog-Fenster (rechts) zum Anpassen der Produktdaten.
 
 ![NewProduct](docs/03_details_edit.png)  
 
