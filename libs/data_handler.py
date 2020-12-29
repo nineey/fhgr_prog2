@@ -7,7 +7,11 @@ import math
 import validators
 from flask import session
 from datetime import date
+import os
 
+
+# source: https://stackoverflow.com/questions/9856683/using-pythons-os-path-how-do-i-go-up-one-directory
+DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'data.json'))
 date = date.today().strftime('%d.%m.%Y')
 
 
@@ -17,7 +21,7 @@ def load_data():
     :return: Dict with all deals
     """
     try:
-        with open("data/data.json", 'r') as db:
+        with open(DATA_PATH, 'r') as db:
             deals = json.load(db)
     except:
         deals = {}
@@ -30,7 +34,7 @@ def save_json(data):
     Save dictionary to existing json file.
     :param data: Data source to save.
     """
-    with open('data/data.json', 'w') as db:
+    with open(DATA_PATH, 'w') as db:
         json.dump(data, db, indent=4)
 
 

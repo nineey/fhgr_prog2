@@ -3,7 +3,10 @@ Contains all functions related to categories.
 """
 
 import json
+import os
 
+# source: https://stackoverflow.com/questions/9856683/using-pythons-os-path-how-do-i-go-up-one-directory
+DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'categories.json'))
 
 def save_category(category):
     """
@@ -11,14 +14,14 @@ def save_category(category):
     :param category: Name of the new category
     """
     try:
-        with open('data/categories.json', 'r') as file:
+        with open(DATA_PATH, 'r') as file:
             categories = json.load(file)
     except:
         categories = []
 
     categories.append(category.capitalize())
 
-    with open('data/categories.json', 'w') as file:
+    with open(DATA_PATH, 'w') as file:
         json.dump(categories, file)
 
 
@@ -28,7 +31,7 @@ def load_categories():
     :return: List of all categories
     """
     try:
-        with open('data/categories.json', 'r') as file:
+        with open(DATA_PATH, 'r') as file:
             categories = json.load(file)
     except:
         categories = []
@@ -43,7 +46,7 @@ def delete_category(category):
     """
     categories = load_categories()
     categories.remove(category)
-    with open('data/categories.json', 'w') as db:
+    with open(DATA_PATH, 'w') as db:
         json.dump(categories, db)
 
 

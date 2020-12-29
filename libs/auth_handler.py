@@ -6,6 +6,10 @@ import functools
 import json
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import session, redirect, url_for, request
+import os
+
+# source: https://stackoverflow.com/questions/9856683/using-pythons-os-path-how-do-i-go-up-one-directory
+DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'users.json'))
 
 
 def login_required(func):
@@ -55,7 +59,7 @@ def load_users():
     function loads users from JSON-File
     :return: dictionary with all user data
     """
-    with open('data/users.json', 'r') as db:
+    with open(DATA_PATH, 'r') as db:
         users = json.load(db)
     return users
 
@@ -65,7 +69,7 @@ def save_user(users):
     saves the user list (dict) into JSON-File
     :param users: dictionary of all users
     """
-    with open('data/users.json', 'w') as db:
+    with open(DATA_PATH, 'w') as db:
         json.dump(users, db, indent=4)
 
 
@@ -87,7 +91,7 @@ def save_new_user(username, password, firstname, lastname):
     Source: https://www.programcreek.com/python/example/58659/werkzeug.security.check_password_hash
     """
     try:
-        with open('data/users.json', 'r') as db:
+        with open(DATA_PATH, 'r') as db:
             users = json.load(db)
     except:
         users = {}
@@ -96,7 +100,7 @@ def save_new_user(username, password, firstname, lastname):
     password = generate_password_hash(password)
     users[username.lower()] = {"username": username, "password": password, "firstname": firstname.capitalize(), "lastname": lastname.capitalize()}
 
-    with open('data/users.json', 'w') as db:
+    with open(DATA_PATH, 'w') as db:
         json.dump(users, db, indent=4)
 
 
