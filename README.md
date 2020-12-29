@@ -49,41 +49,33 @@ Die eingetragenen Daten werden im Ordner `data` ins das jeweilige JSON-File abge
 ### Datenausgabe
 Die Daten werden entsprechend der URL, die der Benutzer aufruft, vom JSON gelesen. Im Anschluss werden die notwendigen Daten mittels Jinja2 im Front-End ausgegeben. 
 
-![UserFlow](docs/UseCaseVotery.png)
+![UserFlow](docs/UserDataFlow.png)
 
 ## Benutzeranleitung
 
-1. Einloggen oder neu registrieren. Für Demo-Zwecke kann der Admin-Account verwendet werden:   
+Einloggen oder neu registrieren. Für Demo-Zwecke kann der Admin-Account verwendet werden:   
 - Username: "Admin"  
 - Passwort: "admin"  
   
   
-![LoginPage](docs/01_login.png?s=100)  
+![LoginPage](docs/01_login.png)  
   
-2. Auf dieser Seite sieht der eingeloggte User alle Produkte, für welche er noch nicht abgestimmt hat. In der Spalte "Voting" kann er für oder gegen das Produkt stimmen. 
+Auf der Seite ***Voting*** (links) sieht der eingeloggte User alle Produkte, für welche er noch nicht abgestimmt hat. In der Spalte "Voting" kann er für oder gegen das Produkt stimmen. 
+Auf der Seite ***Alle Einträge*** (rechts) sieht der User alle in der Datenbank erfassten Produkte. Die Pagination zeigt jeweils 10 Produkte pro Seite. Durch Klick auf das Detail-Icon öffnet sich die Detailseite des gewählten Produktes. 
+
   
-![Voting](docs/02_voting.png)  
+![Voting](docs/02_voting_all.png)  
 
-3. Unter dem Menü-Punkt ***Neuer Eintrag*** kann der Nutzer ein neues Produkt hinzufügen, wofür eine Abstimmung erstellt werden soll. 
+Auf der Detailseite (links) eines Produktes sind sämtliche Informationen sichtbar. Zusätzlich sieht der Nutzer die Abstimmungsergebnisse als Tabelle und grafische Darstellung.
+Durch klick auf den Button "Bearbeiten" öffnet sich ein Dialog-Fenster (rechts) zum Anpassen der Produktdaten.
 
-![NewProduct](docs/04_new.png)  
+![NewProduct](docs/03_details_edit.png)  
 
-4. Auf dieser Seite sieht der User alle in der Datenbank erfassten Produkte. Die Pagination zeigt jeweils 10 Produkte pro Seite. Durch Klick auf das Detail-Icon öffnet sich die Detailseite des gewählten Produktes. 
+Unter dem Menü-Punkt ***Neuer Eintrag*** kann der Nutzer ein neues Produkt hinzufügen, wofür eine Abstimmung erstellt werden soll.
+Auf der Seite ***Kategorien*** können neue Kategorien hinzugefügt oder entfernt werden.  
   
-![AllProducts](docs/03_all.png)  
+![AllProducts](docs/04_new_cat.png)  
 
-   5. Auf der Detailseite eines Produktes sind sämtliche Informationen sichtbar. Zusätzlich sieht der Nutzer die Abstimmungsergebnisse als Tabelle und grafische Darstellung.  
-![Detailpage](docs/05_pdp.png)  
-
-6. Auf der Detailseite kann ein Produkt bearbeitet werden. Durch klick auf den Button "Bearbeiten" öffnet sich ein Dialog-Fenster zum Anpassen der Produktdaten. 
-  
-![Detailpage](docs/06_edit.png)  
-
-7. Unter dem Menü-Punkt ***Verwalten > Kategorien*** können Kategorien hinzugefügt oder entfernt werden. 
-  
-![Categories](docs/07_categories.png)  
-
-7. Unter dem Menü-Punkt ***Verwalten > Users*** können Benutzer hinzugefügt oder entfernt werden. 
-  
-![Users](docs/08_users.png)
+Unter dem Menü-Punkt ***Aktueller Benutzer > Benutzer verwalten*** können Benutzer hinzugefügt oder entfernt werden. 
+![Detailpage](docs/05_users.png)
 
