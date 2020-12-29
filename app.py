@@ -5,7 +5,7 @@ from libs.auth_handler import *
 from libs.category_handler import *
 from libs.data_handler import *
 
-app = Flask(__name__)
+app = Flask("Votery")
 # secret key for session based stuff like login and flash. should be more secret in real project.
 app.config["SECRET_KEY"] = "1234ThisIsTheVerySecretKeyOfNineey4321"
 
@@ -52,8 +52,8 @@ def register():
 @login_required
 def index():
     """
-    Start of the applicaiton after login
-    :return: Redirect to voting page
+    Start of the application after login
+    :return: Load template "voting.html"
     """
     return render_template("voting.html", title="Voting", deals=load_data(), user=session["USERNAME"], categories=load_categories())
 
@@ -99,7 +99,7 @@ def delete_entry(deal_id):
 def show_deal(id):
     """
     Show the detailpage of a choosen deal.
-    :param id: Idenfitication number of the deal.
+    :param id: Identification number of the deal
     :return: Load template "detailpage.html" with deal data
     """
     if check_key(id) is False:
@@ -138,7 +138,7 @@ def voting_vote(deal_id, vote):
 @login_required
 def logout():
     """
-    Logout function. Pops the session.
+    Logout function. Removes the username from session.
     :return: Redirects to login page.
     """
     session.pop("USERNAME", None)
@@ -148,6 +148,11 @@ def logout():
 @app.route('/new_entry', methods=['GET', 'POST'])
 @login_required
 def new_entry():
+    """
+    Function to save a new deal (product) into data.json
+    :return: first, render Template "new_entry.html".
+            After adding a new deal or error, redirect to the same page but with flash message in session
+    """
     if request.method == 'POST':
         name = request.form['post_name']
         producer = request.form['post_producer']
@@ -173,6 +178,11 @@ def new_entry():
 @app.route('/update_deal/<id>', methods=['GET', 'POST'])
 @login_required
 def update_deal(id):
+    """
+    Allows to edit the data of a deal in the database
+    :param id: unique identifier of the deal, which is to update
+    :return: redirect to previous detailpage
+    """
     if request.method == 'POST':
         name = request.form['post_name']
         producer = request.form['post_producer']
@@ -237,6 +247,10 @@ def users():
 @app.route("/users/add", methods=['GET', 'POST'])
 @login_required
 def add_user():
+    """
+    Allows to add a new user
+    :return: redirect to users.html after adding the new user
+    """
     if request.method == 'POST':
         username = request.form['input_username']
         password = request.form['input_password']
@@ -266,9 +280,9 @@ def users_delete_user(username):
 @app.errorhandler(404)
 def not_found(e):
     """
+    Load error page if url path is invalid
     Source: https://flask.palletsprojects.com/en/1.1.x/patterns/errorpages/
-    :param e:
-    :return:
+    :return: login.html if not logged-in, else 404.html
     """
     if "USERNAME" not in session:
         return redirect(url_for("login"))
