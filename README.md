@@ -15,8 +15,8 @@ Damit ***Votery*** lokal gestartet werden kann, werden mindestens folgende Insta
  - `Jinja2 (2.11.2)`  
  - `Plotly (4.13.0)`  
  
-Alternativ kann auch das File `requirements.txt` zur Installation verwendet werden. 
-Zusätzlich wird eine aktive Internetverbindung zum Ausführen der Anwendung vorausgesetzt.   
+Alternativ können alle Abhängigkeiten über den Befehl `pip3 install -r requirements.txt` installiert werden.
+Zusätzlich wird eine aktive Internetverbindung zum Ausführen der Anwendung vorausgesetzt. ``  
   
 Im Anschluss kann das Tool mit dem Befehl `python app.py` gestartet und über den Localhost (i.d.R 127.0.0.1, Port 5000) aufgerufen werden.   
   
