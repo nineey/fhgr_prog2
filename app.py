@@ -160,13 +160,9 @@ def new_entry():
         old_price = request.form['post_price_old']
         category = request.form['post_category']
         link = request.form['post_link']
-        if check_url_input(link) is False:
-            flash("Bitte eine gültige URL eingeben", "danger")
-            return redirect(url_for("new_entry"))
-        else:
-            pass
+        # check price: new price must be smaller than old price
         if check_price(new_price, old_price) is False:
-            flash("Der Aktionspreis muss kleider als der Stattpreis sein!", "danger")
+            flash("Der Aktionspreis muss kleiner als der Stattpreis sein!", "danger")
             return redirect(url_for("new_entry"))
         else:
             save_new_deal(id_handler(), name, producer, new_price, old_price, link, category)
