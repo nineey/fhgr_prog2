@@ -18,6 +18,7 @@ def login_required(func):
     Add "@login_required" to app_route for protection
     Source: https://blog.tecladocode.com/protecting-endpoints-in-flask-apps-by-requiring-login/
     """
+
     @functools.wraps(func)
     def secure_function(*args, **kwargs):
         if "USERNAME" not in session:
@@ -38,16 +39,17 @@ def check_login(username, password):
     users = load_users()
 
     # check if given username exists
-    if username.lower() not in users:
+    if username.lower() not in users or users[username.lower()]["status"] == "disabled":
         # return to login page
         return redirect(request.url)
     else:
         user = users[username.lower()]
+    # check status of the user
     # check if given password matches the username
     # if true: set session
     # re-hash password to check the input
     if check_password_hash(user["password"], password):
-        session["USERNAME"] = user["username"]
+        session["USERNAME"] = user["username"].lower()
         return True
     else:
         # redirect to login page if password wrong
@@ -76,11 +78,12 @@ def save_user(users):
 def delete_user(username):
     """
     function to delete a user form the user list
-    Not possible to delete the admin user
-    :param username: unique main key of dict to identify which user to delete
+    in order to keep the votings, user will be deactivated but not removed in users.json
+    Not possible to deactivate the admin user
+    :param username: unique main key of dict to identify which user to deactivate
     """
     users = load_users()
-    del users[username.lower()]
+    users[username.lower()]["status"] = "disabled"
     save_user(users)
 
 
@@ -98,7 +101,8 @@ def save_new_user(username, password, firstname, lastname):
 
     # hash password for security reasons
     password = generate_password_hash(password)
-    users[username.lower()] = {"username": username, "password": password, "firstname": firstname.capitalize(), "lastname": lastname.capitalize()}
+    users[username.lower()] = {"username": username.lower(), "password": password, "firstname":
+        firstname.capitalize(), "lastname": lastname.capitalize(), "status": "enabled"}
 
     with open(DATA_PATH, 'w') as db:
         json.dump(users, db, indent=4)
@@ -115,6 +119,3 @@ def check_username(username):
         return "taken"
     else:
         pass
-
-
-
