@@ -109,8 +109,8 @@ def update_deal_data(id, name, producer, new_price, old_price, link, category):
     discount = get_discount(new_price, old_price)
     deals[id]["name"] = name
     deals[id]["producer"] = producer
-    deals[id]["new_price"] = int(new_price)
-    deals[id]["old_price"] = int(old_price)
+    deals[id]["new_price"] = float(new_price)
+    deals[id]["old_price"] = float(old_price)
     deals[id]["discount"] = int(discount)
     deals[id]["link"] = link
     deals[id]["category"] = category
