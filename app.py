@@ -68,6 +68,7 @@ def all_deals_range(page):
     """
     count = 10
     page_int = int(page)
+    # page = 1 is index = 0
     page_int_for_data = page_int - 1
     start = page_int_for_data * count
     max_pages = int(load_data_range(start, count)[1])
