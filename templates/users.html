@@ -22,15 +22,18 @@
         </thead>
 
         {% for user in users.values() %}
-            <tbody>
-            <tr>
-                <th scope="row">{{ user["username"] }}</th>
-                <td>{{ user["firstname"] }} </td>
-                <td>{{ user["lastname"] }}</td>
-                {% if not user["username"] == "admin" %}
-                    <td><a href="{{ url_for("users_delete_user", username=user["username"]) }}"><i class="fas fa-trash fa-2x color-red"></i></a></td>
-                {% endif %}
-            </tbody>
+            {% if user["status"] == "enabled" %}
+                <tbody>
+                <tr>
+                    <th scope="row">{{ user["username"] }}</th>
+                    <td>{{ user["firstname"] }} </td>
+                    <td>{{ user["lastname"] }}</td>
+                    {% if not user["username"] == "admin" %}
+                        <td><a href="{{ url_for("users_delete_user", username=user["username"]) }}"><i
+                                class="fas fa-trash fa-2x color-red"></i></a></td>
+                    {% endif %}
+                </tbody>
+            {% endif %}
         {% endfor %}
     </table>
 
@@ -60,9 +63,9 @@
         <button type="submit" class="btn btn-success mt-3 mb-5">User hinzufügen</button>
     </form>
 
-<!-- end of section -->
+    <!-- end of section -->
 
-      <!-- show message when username is taken -->
+    <!-- show message when username is taken -->
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
