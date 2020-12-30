@@ -18,7 +18,7 @@ Damit ***Votery*** lokal gestartet werden kann, werden mindestens folgende Insta
 Alternativ können alle Abhängigkeiten über den Befehl `pip3 install -r requirements.txt` installiert werden.
 Zusätzlich wird eine aktive Internetverbindung zum Ausführen der Anwendung vorausgesetzt. 
   
-Im Anschluss kann das Tool mit dem Befehl `python app.py` gestartet und über den Localhost (i.d.R 127.0.0.1, Port 5000) aufgerufen werden.   
+Im Anschluss kann das Tool mit dem Befehl `flask run` gestartet und über den Localhost (i.d.R 127.0.0.1, Port 5000) aufgerufen werden.   
   
 ## Anforderungen  
 Für die Umsetzung des Projekts wurden die folgenden Anforderungen definiert:   
