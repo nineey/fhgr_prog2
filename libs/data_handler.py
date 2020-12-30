@@ -4,7 +4,6 @@ Contains all functions related to data management.
 
 import json
 import math
-import validators
 from flask import session
 from datetime import date
 import os
@@ -176,17 +175,3 @@ def get_discount(new_price, old_price):
     calc_diff = (float(new_price) / float(old_price))
     discount = round((1 - calc_diff) * 100)
     return discount
-
-
-def check_url_input(url_input):
-    """
-    Source: https://www.codespeedy.com/check-if-a-string-is-a-valid-url-or-not-in-python
-    Check if entered URL is a valid URL
-    :param url_input: User input with the URL
-    :return: True if input is a valid URL, False if not.
-    """
-    validation = validators.url(url_input)
-    if validation == True:
-        return True
-    else:
-        return False
