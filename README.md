@@ -9,13 +9,14 @@ In einem Team mit mehreren Mitarbeitern gibt es Abstimmungen über Produkte, mit
 Das Tool ***Votery*** unterstützt das Team beim Abstimmungsprozess, indem alle Produkte und zugehörige Abstimmungsergebnisse zentral gespeichert werden. Ein Login für ***Votery*** sorgt dafür, dass einfach für Produkte gevoted werden kann.   
   
 ## Installation  
-Damit ***Votery*** lokal gestartet werden kann, werden folgende Installationen (getestete Version) benötigt:   
+Damit ***Votery*** lokal gestartet werden kann, werden mindestens folgende Installationen (getestete Version) benötigt:   
  - `Python (3.8)`  
  - `Flask (1.1.2)`  
  - `Jinja2 (2.11.2)`  
  - `Plotly (4.13.0)`  
  
-Zusätzlich ist eine aktive Internetverbindung vorausgesetzt.   
+Alternativ kann auch das File `requirements.txt` zur Installation verwendet werden. 
+Zusätzlich wird eine aktive Internetverbindung zum Ausführen der Anwendung vorausgesetzt.   
   
 Im Anschluss kann das Tool mit dem Befehl `python app.py` gestartet und über den Localhost (i.d.R 127.0.0.1, Port 5000) aufgerufen werden.   
   
