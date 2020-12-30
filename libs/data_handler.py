@@ -8,7 +8,6 @@ from flask import session
 from datetime import date
 import os
 
-
 # source: https://stackoverflow.com/questions/9856683/using-pythons-os-path-how-do-i-go-up-one-directory
 DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'data.json'))
 date = date.today().strftime('%d.%m.%Y')
@@ -88,8 +87,9 @@ def save_new_deal(id, name, producer, new_price, old_price, link, category):
     """
     deals = load_data()
     discount = get_discount(new_price, old_price)
-    deals[id] = {"user": session["USERNAME"], "name": name, "producer": producer, "new_price": new_price, "old_price": old_price,
-                 "discount": discount, "link": link, "category": category, "date": str(date),
+    deals[id] = {"user": session["USERNAME"], "name": name, "producer": producer, "new_price": float(new_price),
+                 "old_price": float(old_price),
+                 "discount": int(discount), "link": link, "category": category, "date": str(date),
                  "accepted": [], "rejected": []}
 
     save_json(deals)
@@ -109,9 +109,9 @@ def update_deal_data(id, name, producer, new_price, old_price, link, category):
     discount = get_discount(new_price, old_price)
     deals[id]["name"] = name
     deals[id]["producer"] = producer
-    deals[id]["new_price"] = new_price
-    deals[id]["old_price"] = old_price
-    deals[id]["discount"] = discount
+    deals[id]["new_price"] = int(new_price)
+    deals[id]["old_price"] = int(old_price)
+    deals[id]["discount"] = int(discount)
     deals[id]["link"] = link
     deals[id]["category"] = category
 
@@ -154,7 +154,7 @@ def add_voting(deal_id, username, vote):
     :param vote: What's the vote? Accepted / Rejected.
     """
     deals = load_data()
-    deals[deal_id][vote].append(username)
+    deals[deal_id][vote].append(username.lower())
     save_json(deals)
 
 

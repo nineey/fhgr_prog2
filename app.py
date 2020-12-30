@@ -55,7 +55,8 @@ def index():
     Start of the application after login
     :return: Load template "voting.html"
     """
-    return render_template("voting.html", title="Voting", deals=load_data(), user=session["USERNAME"], categories=load_categories())
+    return render_template("voting.html", title="Voting", deals=load_data(), user=session["USERNAME"],
+                           categories=load_categories())
 
 
 @app.route("/all/<page>")
@@ -79,7 +80,8 @@ def all_deals_range(page):
     elif int(page) < 1:
         return redirect(url_for("all_deals_range", page=1))
     else:
-        return render_template("all.html", title="Overview", deals=load_data_range(start, count)[0], user=session["USERNAME"],
+        return render_template("all.html", title="Overview", deals=load_data_range(start, count)[0],
+                               user=session["USERNAME"],
                                nextPage=page_int + 1, prevPage=page_int - 1, max_pages=max_pages, page=int(page))
 
 
@@ -112,13 +114,14 @@ def show_deal(id):
         values = [get_voting(id)[2], get_voting(id)[3]]
         fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
         fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
-                      marker=dict(colors=colors))
+                          marker=dict(colors=colors))
         plotly_div = plotly.io.to_html(fig, include_plotlyjs=True, full_html=False)
         # get_voting(id)[X] --> [0]:list_accepted, [1]list_rejected, [2]list_accepted_length, [3]list_rejected_length
-        return render_template("detailpage.html", title="Details", deal=deals[id], deal_id=id, users=load_users(), categories=load_categories(),
-                            accepted=get_voting(id)[0], rejected=get_voting(id)[1],
-                            accepted_counter=get_voting(id)[2], rejected_counter=get_voting(id)[3],
-                            voting_pie=plotly_div)
+        return render_template("detailpage.html", title="Details", deal=deals[id], deal_id=id, users=load_users(),
+                               categories=load_categories(),
+                               accepted=get_voting(id)[0], rejected=get_voting(id)[1],
+                               accepted_counter=get_voting(id)[2], rejected_counter=get_voting(id)[3],
+                               voting_pie=plotly_div)
 
 
 @app.route("/voting/<vote>/<deal_id>")
@@ -271,7 +274,11 @@ def users_delete_user(username):
     :return: Redirect vo referred page
     """
     delete_user(username)
-    return redirect(request.referrer)
+    # logout if user deletes his own account
+    if username == session["USERNAME"]:
+        return redirect(url_for("logout"))
+    else:
+        return redirect(request.referrer)
 
 
 @app.errorhandler(404)

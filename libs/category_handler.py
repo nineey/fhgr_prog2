@@ -8,6 +8,7 @@ import os
 # source: https://stackoverflow.com/questions/9856683/using-pythons-os-path-how-do-i-go-up-one-directory
 DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'categories.json'))
 
+
 def save_category(category):
     """
     Save new category to existing or new JSON-file
