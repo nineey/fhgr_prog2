@@ -31,7 +31,7 @@
             <tr>
                 <td class="align-middle">{{ id }}</td>
                 <td class="align-middle">{{ value["producer"] }} {{ value["name"] }}</td>
-                <td class="align-middle">CHF {{ value["new_price"] }}  <br> <small>statt CHF {{ value["old_price"] }}</small></td>
+                <td class="align-middle">CHF {{ '{0:0.2f}'.format(value["new_price"]) }}  <br> <small>statt CHF {{ '{0:0.2f}'.format(value["old_price"]) }}</small></td>
                 {% if value["discount"]|int < 10  %}
                 <td class="align-middle"><h4><span class="badge badge-danger">{{ value["discount"] }}%</span></h4></td>
                 {% else %}
