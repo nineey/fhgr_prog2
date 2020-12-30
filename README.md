@@ -1,7 +1,10 @@
 
 # Votery  
 Dieses Projekt ist im Rahmen des Moduls *Programmierung 2* an der Fachhochschule Graubünden entstanden.   
-  
+
+**Preview**: https://votery.herokuapp.com/
+
+
 ## Ausgangslage  
 In einem Team mit mehreren Mitarbeitern gibt es Abstimmungen über Produkte, mit denen Sonderaktionen durchgeführt werden sollen. Bis anhin fanden diese Abstimmungen per umständlichem Mail-Verkehr statt.   
   
