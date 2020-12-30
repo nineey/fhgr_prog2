@@ -38,22 +38,36 @@ def save_json(data):
 
 
 def load_data_range(start, count):
+    """
+    Load a range of deals for pagination on all.html
+    :param start: Start index of the range
+    :param count: Quantity of showed entries (10)
+    :return: list with 10 deals[0] + maximum of pages required for navigation[1]
+    """
     deals = load_data()
     keys = deals.keys()
+    # Convert list of str(key) into int(key)
     keys = [int(i) for i in keys]
+    # reverse list of keys -> newest entries first
     keys = list(reversed(keys))
+    # calculate required pages
     max_pages = math.ceil((len(keys)) / 10)
-
+    # get 10 keys out of the list and create new list
     sliced_keys = keys[start:start + count]
-
     deals_to_return = {}
+    # transform list of sliced keys back to dict with product data
     for key in sliced_keys:
         deals_to_return[str(key)] = deals[str(key)]
-
     return deals_to_return, max_pages
 
 
 def check_key(key):
+    """
+    Check if product-ID (key) exists in data.json.
+    Used for error handling and URL manipulation.
+    :param key: Product ID (keys in dict of data.json)
+    :return: True if Key exists, False if not
+    """
     deals = load_data()
     keys = deals.keys()
     if key in keys:
@@ -159,6 +173,12 @@ def get_voting(deal_id):
 
 
 def check_price(new_price, old_price):
+    """
+    Check and compare the old and new price. New price must be lower.
+    :param new_price: User input of the special offer price
+    :param old_price: User input of the original price
+    :return: False, if original price is higher, else pass
+    """
     if float(new_price) >= float(old_price):
         return False
     else:
