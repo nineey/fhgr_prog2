@@ -16,7 +16,7 @@ Damit ***Votery*** lokal gestartet werden kann, werden mindestens folgende Insta
  - `Plotly (4.13.0)`  
  
 Alternativ können alle Abhängigkeiten über den Befehl `pip3 install -r requirements.txt` installiert werden.
-Zusätzlich wird eine aktive Internetverbindung zum Ausführen der Anwendung vorausgesetzt. ``  
+Zusätzlich wird eine aktive Internetverbindung zum Ausführen der Anwendung vorausgesetzt. 
   
 Im Anschluss kann das Tool mit dem Befehl `python app.py` gestartet und über den Localhost (i.d.R 127.0.0.1, Port 5000) aufgerufen werden.   
   
