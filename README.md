@@ -2,7 +2,7 @@
 # Votery  
 Dieses Projekt ist im Rahmen des Moduls *Programmierung 2* an der Fachhochschule Graubünden entstanden.   
 
-**Preview**: https://votery.herokuapp.com/
+**Preview**: https://votery.herokuapp.com/ (:warning: Heroku Free Dyno: Bis zu 30 Sekunden Ladezeit)
 
 
 ## Ausgangslage  
@@ -16,7 +16,8 @@ Damit ***Votery*** lokal gestartet werden kann, werden mindestens folgende Insta
  - `Python (3.8)`  
  - `Flask (1.1.2)`  
  - `Jinja2 (2.11.2)`  
- - `Plotly (4.13.0)`  
+ - `Plotly (4.13.0)`
+ - `Werkzeug (1.0.1)`    
  
 Alternativ können alle Abhängigkeiten über den Befehl `pip3 install -r requirements.txt` installiert werden.
 Zusätzlich wird eine aktive Internetverbindung zum Ausführen der Anwendung vorausgesetzt. 
