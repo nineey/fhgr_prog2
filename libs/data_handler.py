@@ -29,7 +29,7 @@ def load_data():
 
 def save_json(data):
     """
-    Save dictionary to existing json file.
+    Save dictionary to new or existing json file.
     :param data: Data source to save.
     """
     with open(DATA_PATH, 'w') as db:

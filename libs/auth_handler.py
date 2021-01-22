@@ -61,14 +61,17 @@ def load_users():
     function loads users from JSON-File
     :return: dictionary with all user data
     """
-    with open(DATA_PATH, 'r') as db:
-        users = json.load(db)
+    try:
+        with open(DATA_PATH, 'r') as db:
+            users = json.load(db)
+    except:
+        users = {}
     return users
 
 
 def save_user(users):
     """
-    saves the user list (dict) into JSON-File
+    saves the user list (dict) into new or existing JSON-File
     :param users: dictionary of all users
     """
     with open(DATA_PATH, 'w') as db:
@@ -93,19 +96,13 @@ def save_new_user(username, password, firstname, lastname):
     Hash the password before saving.
     Source: https://www.programcreek.com/python/example/58659/werkzeug.security.check_password_hash
     """
-    try:
-        with open(DATA_PATH, 'r') as db:
-            users = json.load(db)
-    except:
-        users = {}
-
+    users = load_users()
     # hash password for security reasons
     password = generate_password_hash(password)
     users[username.lower()] = {"username": username.lower(), "password": password, "firstname":
         firstname.capitalize(), "lastname": lastname.capitalize(), "status": "enabled"}
 
-    with open(DATA_PATH, 'w') as db:
-        json.dump(users, db, indent=4)
+    save_user(users)
 
 
 def check_username(username):

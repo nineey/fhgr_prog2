@@ -14,14 +14,8 @@ def save_category(category):
     Save new category to existing or new JSON-file
     :param category: Name of the new category
     """
-    try:
-        with open(DATA_PATH, 'r') as file:
-            categories = json.load(file)
-    except:
-        categories = []
-
+    categories = load_categories()
     categories.append(category.capitalize())
-
     with open(DATA_PATH, 'w') as file:
         json.dump(categories, file)
 
